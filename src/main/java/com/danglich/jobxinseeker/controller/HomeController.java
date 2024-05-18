@@ -26,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
+@Slf4j
 public class HomeController {
 	
 	private final JobService jobService;
@@ -34,6 +35,8 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String showHome(Authentication authentication, Model theModel) {
+		
+		log.info("Acessing home page");
         // for search form
 		theModel.addAttribute("experiences", Experience.values());
 		theModel.addAttribute("addresses", addressService.getAll());
