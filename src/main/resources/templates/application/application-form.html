@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Việc làm</title>
+     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <div th:replace="home/header.html :: body"></div>
+
+    <!-- Phần content -->
+    <div class="bg-[#f4f5f5]">
+        <div class="container pt-[24px]">
+            
+    
+            <div class="row">
+                <div class="col-sm-8 ">
+                    <div class="bg-white rounded-[10px] px-[24px] py-[16px]">
+                        <h2  class="font-bold text-[22px] leading-[30px]">Ứng tuyển : <span class="text-green-700" th:text="${job.title}"></span></h2>
+                        
+                    </div>
+
+                    <div class="bg-white rounded-[10px] px-[24px] py-[16px] mt-[28px]">
+                        
+                        <form th:action="@{/ung-tuyen}" th:object="${application}" method="post" enctype="multipart/form-data">
+                            <input onChange="handleCvModeChange()" type="radio" id="cv_uploaded" th:field="*{mode}" required value="UPLOADED">
+                            <label for="html" class="font-bold text-[17px]">Sử dụng CV đã tải lên</label><br>
+                            <input onChange="handleCvModeChange()" type="radio" id="new_cv" th:field="*{mode}" required value="NEW">
+                            <label for="css" class="font-bold text-[17px]">Tải CV từ máy</label><br>
+                            <input type="hidden" th:field="*{jobId}" />
+                            <ul  id="form_cv_uploaded" class="px-[14px] mt-[16px] py-[16px] rounded-[8px] border-[1px] border-solid border-[green]">
+                                <h4 class="text-[18px]">CV đã tải lên</h4> 
+                                <label th:for="'cvId' + ${cv.id}" th:each="cv : ${cvs}"  th:data-value="${cv.id}" class="h-[40px] mb-[16px] flex group rounded-[4px] cursor-pointer items-center justify-between px-[12px] border-[1px] hover:border-[green!important] border-solid border-[#ccc]">
+                                    <input type="radio" th:field="*{cvId}" th:value="${cv.id}" th:id="'cvId' + ${cv.id}"  required>
+                                    <span th:text="${cv.filename}">cv_nguyen_dang_lich.pdf</span>
+                                    <a target="_blank" th:href="@{/xem-cv/{cvId}(cvId = ${cv.id})}" class="font-[500]  group-hover:inline-block text-green-900">Xem</a>
+                                </label>
+                            </ul>
+
+                            <div  id="form_new_cv"  class="mt-[12px] hidden">
+                                <p class="font-[500] text-[17px]">Tải lên từ máy tính</p>
+                                <input id="file_input" class="mt-[6px]" type="file" th:field="*{file}"  accept="application/pdf">
+
+                            </div>
+
+                            <div class="flex items-center mt-[24px] gap-[16px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-send-check-fill" viewBox="0 0 16 16">
+                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                                    <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686"/>
+                                  </svg>
+                                  <span class="font-bold text-[18px]">Thư giới thiệu</span>
+                                  
+                            </div>
+                            <p class="text-[15px] opacity-[0.8]">Một thư giới thiệu ngắn gọn, chỉn chu sẽ giúp bạn trở nên chuyên nghiệp và gây ấn tượng hơn với nhà tuyển dụng.</p>
+                            <textarea th:field="*{message}" class="border p-[8px] mt-[12px] h-[80px] rounded outline-none w-full"></textarea>
+
+                            <button class="h-[42px] mt-[16px] hover:opacity-[0.8] w-[200px] rounded bg-green-700 text-white ">Nộp hồ sơ ứng tuyển</button>
+                        </form>
+                        
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="bg-white rounded-[10px] py-[16px] px-[18px]">
+                        <a th:href="@{/cong-ty/{companyId}(companyId=${job.company.id})}" class="flex mb-[14px]">
+                            <div class="w-[88px] mr-[12px] border-solid border-[1px] rounded-[8px] border-[#ccc] flex-shrink-0 h-[88px] flex items-center justify-center">
+                                <img class="w-[100%]  rounded-[8px]" th:src="${job.company.avatar}">
+
+                            </div>
+                            <h4 th:text="${job.company.name}" class="text-[17px]" ></h4>
+                        </a>
+
+                        <div class="flex mb-[12px]">
+                            <div class="w-[100px]  flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#777" class="bi bi-buildings-fill" viewBox="0 0 16 16">
+                                    <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zM2 11h1v1H2zm2 0h1v1H4zm-1 2v1H2v-1zm1 0h1v1H4zm9-10v1h-1V3zM8 5h1v1H8zm1 2v1H8V7zM8 9h1v1H8zm2 0h1v1h-1zm-1 2v1H8v-1zm1 0h1v1h-1zm3-2v1h-1V9zm-1 2h1v1h-1zm-2-4h1v1h-1zm3 0v1h-1V7zm-2-2v1h-1V5zm1 0h1v1h-1z"/>
+                                </svg>
+                                <span class="ml-[8px] text-[#777]">Quy mô : </span>
+                            </div>
+                            <p th:text="${job.company.scale}"></p>
+                        </div>
+                        <div class="flex mb-[12px] items-start">
+                            <div class="w-[100px] flex-shrink-0  flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#777" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                  </svg>
+                                <span class="ml-[6px] text-[#777]">Địa điểm </span>
+                            </div>
+                            <p th:text="${job.company.address}">29 Lê Đại Hành, Hai Bà Trưng, Hà Nội</p>
+                        </div>
+                    </div>
+
+                    <!-- việc làm gợi ý -->
+                    <div class="bg-white rounded-[10px] px-[18px] py-[16px] mt-[24px]">
+                        <h4 class="text-[18px] ">Gợi ý việc làm phù hợp</h4>
+                        <div th:each="job : ${suggestJobsByUser}">
+                            <a th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" class="px-[8px] block shadow-md hover:bg-[#f5f5f5] py-[12px] cursor-pointer mb-[12px] rounded-[6px] border-[1px] border-solid border-[#ccc]">
+                                <div  class="flex">
+                                    <div class="w-[50px] flex items-center justify-center mr-[8px] h-[50px] flex-shrink-0 ">
+                                        <img class="w-full" th:src="${job.company.avatar}">
+
+                                    </div>
+                                    <div>
+                                        <h4 th:text="${job.title}" class="text-over overflow-hidden text-[15px] hover:text-[green] mb-[8px]"></h4>
+                                        <p th:text="${job.company.name}" class="text-over text-[13px]"></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mt-[18px]">
+                                    <div class="flex gap-[10px]">
+                                        <p class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"><span th:text="${job.salaryStart}"></span> - <span th:text="${job.salaryEnd}"></span> triệu</p>
+                                        <p th:text="${job.address.province}" class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"></p>
+
+                                    </div>
+                                    <button class="px-[4px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                          </svg>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    
+
+    function handleCvModeChange() {
+        var formForCvUploaded = document.getElementById("form_cv_uploaded");
+        let formForNewCv = document.getElementById("form_new_cv");
+        var isUseCvUploaded = document.getElementById("cv_uploaded");
+        var isUseNewCv = document.getElementById("new_cv");
+        let inputFile = document.getElementById("file_input");
+        
+        if(isUseCvUploaded.checked ) {
+            formForCvUploaded.classList.remove("hidden");
+            formForNewCv.classList.add("hidden");
+            inputFile.required = false;
+
+            var inputs = document.querySelectorAll('input[name="cvId"]');
+            inputs.forEach(function(input) {
+                input.required = true;
+            });
+        } else {
+            formForNewCv.classList.remove("hidden");
+            formForCvUploaded.classList.add("hidden");
+            inputFile.required = true;
+            
+            var inputs = document.querySelectorAll('input[name="cvId"]');
+            inputs.forEach(function(input) {
+                input.required = false;
+            });
+        }
+
+    }
+
+    function handleChooseCvUploaded(event) {
+        let value = event.target.getAttribute("data-value");
+        let inputCvId = document.getElementById("cvId");
+        inputCvId.value = value;
+
+        let cvItems = document.querySelectorAll("#form_cv_uploaded li");
+        cvItems.forEach((item) => {
+            item.classList.remove("border-[green!important]");
+            item.classList.remove("border-[2px]");
+            item.classList.remove("text-[green!important]");
+        })
+
+        event.target.classList.add("border-[green!important]");
+        event.target.classList.add("border-[2px]");
+    }
+    
+  </script>
+
+</body>
+</html>

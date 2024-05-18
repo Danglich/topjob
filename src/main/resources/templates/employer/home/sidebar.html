@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body >
+        <!-- Sidebar -->
+        <aside class="w-[280px] bg-white shadow bottom-[0] fixed top-[60px]">
+            <div class="flex gap-[8px] p-4">
+                <div>
+                    <img class="w-[32px] h-[32px] rounded-full" th:src="@{/static/images/avatar-default.jpg}" />
+                </div>
+                <div>
+                    <h5>Nguyễn Sương</h5>
+                    <p class="text-[13px]">Employer</p>
+                    <p class="text-[13px]">Tài khoản xác thực cấp <span class="text-[green]">1/5</span></p>
+                </div>
+
+            </div>
+            <hr>
+            <nav>
+                <ul class="p-4">
+                    <li><a href="#" class="flex items-center gap-[16px] py-2 px-4 text-gray-800 hover:bg-gray-300"><i class="bi bi-newspaper"></i><span class="sidebar-label font-[500]"> Bảng tin</span></a></li>
+                    <li><a href="#" class="flex items-center gap-[16px] py-2 px-4 text-gray-800 hover:bg-gray-300"><i class="bi bi-people"></i><span class="sidebar-label font-[500]"> Chiến dịch tuyển dụng</span></a></li>
+                    <li><a href="#" class="flex items-center gap-[16px] py-2 px-4 text-gray-800 hover:bg-gray-300"><i class="bi bi-bag"></i><span class="sidebar-label font-[500]"> Mua dịch vụ</span></a></li>
+                    <li><a href="#" class="flex items-center gap-[16px] py-2 px-4 text-gray-800 hover:bg-gray-300"><i class="bi bi-tools"></i><span class="sidebar-label font-[500]"> Dịch vụ của tôi</span></a></li>
+                    <li><a href="#" class="flex items-center gap-[16px] py-2 px-4 text-gray-800 hover:bg-gray-300"><i class="bi bi-tag"></i><span class="sidebar-label font-[500]"> Mã ưu đãi</span></a></li>
+                    <li><a href="#" class="flex items-center gap-[16px] py-2 px-4 text-gray-800 hover:bg-gray-300"><i class="bi bi-clock-history"></i><span class="sidebar-label font-[500]"> Lịch sử hoạt động</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+
+</body>
+</html>

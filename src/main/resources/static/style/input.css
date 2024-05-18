@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    color: #344563;
+}
+
+a {
+    text-decoration: none !important; /* Loại bỏ dấu gạch dưới */
+  }
+
+button:focus {
+    outline: none !important;
+}
+
+
+
+.text-over{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.text-over-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+p {
+    margin: 0 !important;
+}
+
+.col-md-4 {
+    padding: 10px !important;
+}

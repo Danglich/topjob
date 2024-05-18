@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${job.title}"></title>
+     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:replace="home/header.html :: body"></div>
+   
+    
+    <!-- <div th:replace="home/slide-banner.html :: body"></div> -->
+
+    <!-- Phần content -->
+    <div class="bg-[#f4f5f5]">
+        <div class="container ">
+            <!-- breadcrumb -->
+            <nav class="pt-[28px] pb-[16px]">
+                <ul class="flex text-[17px]">
+                    <li><a th:href="@{/}" class="text-[green] font-[500] mr-[6px] hover:no-underline hover:text-[green]">Trang chủ</a></li>
+                    <span>/</span>
+                    <li  class="mx-[6px]"><a th:text="${job.category.name}" th:href="@{/category/software}"  class="text-[green] font-[500] mr-[6px] hover:no-underline hover:text-[green]"></a></li>
+                    <span>/</span>
+                    <li th:text="${job.title}" class="mx-[6px]"></li>
+                </ul>
+            </nav>
+    
+            <div class="row">
+                <div class="col-sm-8 ">
+                    <div class="bg-white rounded-[10px] px-[24px] py-[16px]">
+                        <h2 th:text="${job.title}" class="font-bold text-[22px] leading-[30px]"></h2>
+                        <div class="flex justify-between mt-[18px] mb-[24px]">
+                            <div class="flex items-center justify-center">
+                                <div class="w-[40px] mr-[12px] h-[40px] rounded-full bg-[green] flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-coin" viewBox="0 0 16 16">
+                                        <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
+                                      </svg>
+                                </div>
+                                <div>
+                                    <p>Mức lương</p>
+                                    <p class="font-bold"><span th:text="${job.salaryStart}"></span>-<span th:text="${job.salaryEnd}"></span> triệu</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="w-[40px] mr-[12px] h-[40px] rounded-full bg-[green] flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                      </svg>
+                                </div>
+                                <div>
+                                    <p>Địa điểm</p>
+                                    <p th:text="${job.address.province}" class="font-bold">Hà Nội</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="w-[40px] mr-[12px] h-[40px] rounded-full bg-[green] flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-hourglass-split" viewBox="0 0 16 16">
+                                        <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
+                                      </svg>
+                                </div>
+                                <div>
+                                    <p>Kinh nghiệm</p>
+                                    <p th:text="${job.experience.describe}" class="font-bold"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="px-[16px] rounded-[4px] items-center justify-start bg-[#f5f5f5] inline-flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                              </svg>
+                              <span class="mx-[12px]">Hạn nộp hồ sơ: </span>
+                              <span th:text="${@timeUtil.format(job.expiredAt)}"></span>
+                        </p>
+
+                        <!-- Ứng tuyển btn -->
+                        <div class="flex mt-[24px]">
+                            <a th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}" class="flex-1 mr-[16px] rounded-[6px] bg-[green] flex text-[green] items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-send-fill" viewBox="0 0 16 16">
+                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                                </svg>
+                                <span th:if="${!isApplied}" class="font-[500] text-white ml-[8px]">Ứng tuyển ngay</span>
+                                <span th:if="${isApplied}" class="font-[500] text-white ml-[8px]">Ứng tuyển lại</span>
+                            </a>
+                            <form method="post" th:action="@{/save-job}">
+                                <input type="hidden" name="jobId" th:value="${job.id}" />
+                                <button class="w-[130px] border-solid border-[1px] py-[7px] border-[green] rounded-[6px] flex text-[green] items-center justify-center font-[500]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
+                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                      </svg>
+                                    <span class="text-[green] ml-[8px]">Lưu tin</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-[10px] px-[24px] py-[16px] mt-[28px]">
+                        <div class="flex items-center mb-[20px]">
+                            <div class="bg-[green] h-[26px] w-[4px] mr-[12px]"></div>
+
+                            <h4 class="text-[20px] font-bold my-[0]">Chi tiết tin tuyển dụng</h4>
+                        </div>
+
+                        <!-- Mô tả -->
+                        <div class=" mb-[16px]">
+                            <h4 class="text-[18px]">Mô tả công việc</h4>
+                            <ul class="list-disc ml-[24px] text-[15px]">
+                                <li>Sáng tạo kịch bản video trên hệ thống kênh tiktok</li>
+                                <li>Nghiên cứu trend, sáng tạo và ứng dụng trend sản xuất nội dung video viral</li>
+                                <li>Phối hợp với video editor cùng làm việc đảm bảo hiệu quả công việc</li>
+                                <li>Sáng tạo kịch bản video trên hệ thống kênh tiktok</li>
+                            </ul>
+
+                        </div>
+                        <div class=" mb-[16px]">
+                            <h4 class="text-[18px]">Yêu cầu ứng viên</h4>
+                            <ul class="list-disc ml-[24px]  text-[15px]">
+                                <li>Sáng tạo kịch bản video trên hệ thống kênh tiktok</li>
+                                <li>Nghiên cứu trend, sáng tạo và ứng dụng trend sản xuất nội dung video viral</li>
+                                <li>Phối hợp với video editor cùng làm việc đảm bảo hiệu quả công việc</li>
+                                <li>Sáng tạo kịch bản video trên hệ thống kênh tiktok</li>
+                            </ul>
+
+                        </div>
+                        <div class=" mb-[16px]">
+                            <h4 class="text-[18px]">Quyền lợi</h4>
+                            <ul class="list-disc ml-[24px]  text-[15px]">
+                                <li>Sáng tạo kịch bản video trên hệ thống kênh tiktok</li>
+                                <li>Nghiên cứu trend, sáng tạo và ứng dụng trend sản xuất nội dung video viral</li>
+                                <li>Phối hợp với video editor cùng làm việc đảm bảo hiệu quả công việc</li>
+                                <li>Sáng tạo kịch bản video trên hệ thống kênh tiktok</li>
+                            </ul>
+
+                        </div>
+
+                        <div class=" mb-[16px]">
+                            <h4 class="text-[18px]">Địa điểm làm việc</h4>
+                            <ul class="list-disc ml-[24px]  text-[15px]">
+                                <li>Hà Nội: 29 Lê Đại Hành, Hai Bà Trưng</li>
+                                
+                            </ul>
+                        </div>
+
+                        <div class=" mb-[16px]">
+                            <h4 class="text-[18px]">Cách thức ứng tuyển</h4>
+                            <p class="text-[15px]">Ứng viên nộp hồ sơ trực tuyến bằng cách bấm <strong>Ứng tuyển</strong> ngay dưới đây.</p>
+                        </div>
+
+                        <div class="flex mb-[16px]">
+                            <a  th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}"  class="bg-[green] mr-[16px] w-[140px] flex items-center justify-center h-[40px] text-white font-[600] rounded-[8px]">
+                                <span th:if="${!isApplied}" class="font-[500] text-white ml-[8px]">Ứng tuyển ngay</span>
+                                <span th:if="${isApplied}" class="font-[500] text-white ml-[8px]">Ứng tuyển lại</span>
+                            </a>
+                            <button class="w-[100px] h-[40px] text-[green] font-[600] rounded-[8px] border-solid border-[1px] border-[green]">
+                                Lưu tin
+                            </button>
+
+                        </div>
+
+                        <p >Hạn nộp hồ sơ: <span  th:text="${@timeUtil.format(job.expiredAt)}"></span></p>
+                        <hr>
+                        <!-- Việc làm liên quan -->
+                        <div class="mt-[20px]">
+                            <div class="flex items-center mb-[20px]">
+                                <div class="bg-[green] h-[26px] w-[4px] mr-[12px]"></div>
+    
+                                <h4 class="text-[20px] font-bold my-[0]">Việc làm liên quan</h4>
+                            </div>
+
+                            <!-- Danh sách việc làm liên quan -->
+                            <div th:each="job : ${suggestJobs}">
+                                <div class="flex p-[12px] shadow-md mb-[16px] cursor-pointer rounded-[8px] border-[1px] border-solid border-[#ccc] hover:bg-[#f4f5f5]">
+                                    <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#ccc] border-solid">
+                                        <img class="w-[100%] rounded-[8px] " th:src="${job.company.avatar}" />
+                                    </div>
+
+                                    <div>
+                                        <a th:text="${job.title}" th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" class="text-[17px] block mb-[10px] font-[500] text-[#344563] hover:text-[green]"></a>
+                                        <a th:href="@{/cong-ty/{companyId}(companyId=${job.company.id})}" th:text="${job.company.name}" class="text-[15px] text-[#344563]  font-[400] hover:text-[green]"></a>
+                                        <div class="flex gap-[12px] mt-[10px]">
+                                            <p th:text="${job.address.province}" class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Hà Nội</p>
+                                            <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Còn <strong  th:text="${@timeUtil.daysOfExpired(job.expiredAt)}">6</strong> ngày để ứng tuyển</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-[1] flex-column items-end justify-between min-w-[150px]" >
+                                        <p class="font-[500] text-[green]">10 - 12 triệu</p>
+                                        <div class="flex gap-[10px]">
+                                            <a  th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}" class="opacity-[0.7] flex items-center text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</a>
+                                            <button class="px-[6px] bg-[#effbef] rounded-[3px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
+                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                                  </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="bg-white rounded-[10px] py-[16px] px-[18px]">
+                        <a th:href="@{/cong-ty/{companyId}(companyId=${job.company.id})}" class="flex mb-[14px]">
+                            <div class="w-[88px] mr-[12px] border-solid border-[1px] rounded-[8px] border-[#ccc] flex-shrink-0 h-[88px] flex items-center justify-center">
+                                <img class="w-[100%]  rounded-[8px]" th:src="${job.company.avatar}">
+
+                            </div>
+                            <h4 th:text="${job.company.name}" class="text-[17px]" ></h4>
+                        </a>
+
+                        <div class="flex mb-[12px]">
+                            <div class="w-[100px]  flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#777" class="bi bi-buildings-fill" viewBox="0 0 16 16">
+                                    <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zM2 11h1v1H2zm2 0h1v1H4zm-1 2v1H2v-1zm1 0h1v1H4zm9-10v1h-1V3zM8 5h1v1H8zm1 2v1H8V7zM8 9h1v1H8zm2 0h1v1h-1zm-1 2v1H8v-1zm1 0h1v1h-1zm3-2v1h-1V9zm-1 2h1v1h-1zm-2-4h1v1h-1zm3 0v1h-1V7zm-2-2v1h-1V5zm1 0h1v1h-1z"/>
+                                </svg>
+                                <span class="ml-[8px] text-[#777]">Quy mô : </span>
+                            </div>
+                            <p th:text="${job.company.scale}"></p>
+                        </div>
+                        <div class="flex mb-[12px] items-start">
+                            <div class="w-[100px] flex-shrink-0  flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#777" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                  </svg>
+                                <span class="ml-[6px] text-[#777]">Địa điểm </span>
+                            </div>
+                            <p th:text="${job.company.address.province}">29 Lê Đại Hành, Hai Bà Trưng, Hà Nội</p>
+                        </div>
+                    </div>
+
+                    <!-- việc làm gợi ý -->
+                    <div class="bg-white rounded-[10px] px-[18px] py-[16px] mt-[24px]">
+                        <h4 class="text-[18px] ">Gợi ý việc làm phù hợp</h4>
+                        <div th:each="job : ${suggestJobsByUser}">
+                            <a th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" class="px-[8px] block shadow-md hover:bg-[#f5f5f5] py-[12px] cursor-pointer mb-[12px] rounded-[6px] border-[1px] border-solid border-[#ccc]">
+                                <div  class="flex">
+                                    <div class="w-[50px] flex items-center justify-center mr-[8px] h-[50px] flex-shrink-0 ">
+                                        <img class="w-full" th:src="${job.company.avatar}">
+
+                                    </div>
+                                    <div>
+                                        <h4 th:text="${job.title}" class="text-over overflow-hidden text-[15px] hover:text-[green] mb-[8px]"></h4>
+                                        <p th:text="${job.company.name}" class="text-over text-[13px]"></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mt-[18px]">
+                                    <div class="flex gap-[10px]">
+                                        <p class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"><span th:text="${job.salaryStart}"></span> - <span th:text="${job.salaryEnd}"></span> triệu</p>
+                                        <p th:text="${job.address.province}" class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"></p>
+
+                                    </div>
+                                    <button class="px-[4px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                          </svg>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+        </div>
+
+    </div>
+
+	
+</body>
+</html>

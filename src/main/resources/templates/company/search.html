@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Việc làm</title>
+     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div th:replace="home/header.html :: body"></div>
+    <div class="mb-[40px]">
+        <!-- Phần banner -->
+        <div class="bg-gradient-to-tr from-[#fbfffd] to-[#d9ffda] py-[40px]">
+            <div class="container flex">
+                <div class="flex-1">
+                    <h4 class="text-green-600 text-[26px] mb-[20px]">Tìm kiếm công ty phù hợp nhất với bạn</h4>                      
+                    <p class="text-[17px]">Tra cứu thông tin công ty và tìm kiếm nơi làm việc tốt nhất dành cho bạn</p>
+
+                    <!-- Form -->
+                    <form  class="flex shadow-md mt-[36px] bg-white rounded-[24px] px-[12px] py-[10px] hover:border-[green!important] border-white border-solid border-[1px]">
+                        <div class="px-[12px] flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                              </svg>
+                        </div>
+                        <div class="flex-1 mx-[8px]">
+                            <input th:value="${param.keyword}" name="keyword" class="w-full h-full outline-none" type="text" />
+                        </div>
+                        <button class="rounded-[8px] px-[8px] py-[3px] bg-[green] text-white font-[500]">Tìm kiếm</button>
+                    </form>
+                </div>
+                <div class="flex-1 flex items-end justify-end">
+                    <img class="w-[36%]" src="https://static.topcv.vn/v4/image/company-search/img-top.png?v=1.0.0" />
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="bg-[#f4f5f5] pb-[48px]">
+            <div class="container pt-[18px]">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="bg-white rounded-[6px] px-[24px] py-[18px]">
+                            <div th:if="${totalElements  &gt; 0}">
+                                <p class="text-[15px]">
+                                    Tìm thấy <span th:text="${totalElements}" class="font-bold text-green-700"></span> công ty phù hợp với yêu cầu của bạn
+                                </p>
+    
+                                <!-- Danh sách công ty -->
+                                <div class="pt-[16px]"> 
+                                    <a th:href="@{/cong-ty/{companyId}(companyId=${company.id})}" th:each="company : ${companies}" class="flex mb-[16px] border-[1px] hover:border-[green!important] rounded-[8px] border-solid border-[#999] items-start gap-[18px] pl-[12px] pt-[16px] pr-[24px] pb-[28px]">
+                                        <div class="w-[80px] cursor-pointer flex items-center">
+                                            <img class="w-full object-cover" th:src="${company.avatar}" />
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex gap-[8px] items-center">
+                                                <h4 th:text="${company.name}" class="text-[17px] m-[0]"></h4>
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#444" class="bi bi-dot" viewBox="0 0 16 16">
+                                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                                      </svg>
+                                                </div>
+                                                <span>Đang tuyển <span th:text="${#lists.size(company.jobs)}" class="font-bold"></span> vị trí</span>
+                                            </div>
+                                            <div class="py-[8px]">
+                                                <p>
+                                                    <span class="">Trụ sở chính : </span>
+                                                    <span th:text="${company.address}"></span>
+                                                </p>
+                                            </div>
+                                            <p th:text="${company.description}" class="h-[48px] overflow-hidden"></p>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                                <!-- Phần phân trang -->
+                                <div class="pagination">
+                                    <ul class="flex items-center gap-[16px]">
+                                        <li class="" th:if="${currentPage > 0}">
+                                            <a class="block  px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green] " th:href="@{/cong-ty/tim-kiem(page=${currentPage - 1} , keyword=${param.keyword})}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                                </svg>
+                                                
+                                            </a>
+                                        </li>
+                                        <li class="" th:each="page : ${#numbers.sequence(1, totalPages)}">
+                                            <a th:if="${currentPage == page - 1}" class="block bg-[green] text-[#fff!important] px-[16px] rounded  py-[8px]  w-full h-full" th:href="@{/cong-ty/tim-kiem(page=${page - 1},  keyword=${param.keyword})}" th:text="${page}"></a>
+                                            <a th:if="${currentPage != page - 1}" class="block hover:bg-[#ccc] px-[16px] rounded  py-[8px]  w-full h-full" th:href="@{/cong-ty/tim-kiem(page=${page - 1}, keyword=${param.keyword})}" th:text="${page}"></a>
+                                        </li>
+                                        <li th:if="${currentPage < totalPages - 1}">
+                                            <a class="block  px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green]" th:href="@{/cong-ty/tim-kiem(page=${currentPage + 1} , keyword=${param.keyword})}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <!-- Nếu không cos công ty -->
+                            <div class="flex gap-[16px] flex-col items-center justify-center min-h-[500px]" th:if="${totalElements == 0}">
+                                <img th:src="@{/static/images/empty.webp}" />
+                                <p>Không tìm thấy công ty nào phù hợp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="bg-white rounded-[8px] px-[12px] pt-[16px] pb-[24px]">
+                            <h4 class="font-bold text-[18px] text-green-700">Nhà tuyển dụng hàng đầu</h4>
+
+                            <div class="row mt-[16px]">
+                                <div th:each="company : ${topCompanies}" class="col-6 flex mb-[24px] items-center justify-center">
+                                    <a th:href="@{/cong-ty/{companyId}(companyId=${company.id})}" class="cursor-pointer border-[1px] w-[88px] h-[88px] border-solid border-[#888] hover:border-[green!important] flex items-center justify-center rounded-full">
+                                        <img class="w-[70%] h-[70%] object-cover rounded-[10px]" th:src="${company.avatar}" />
+
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+	
+    
+    
+    
+    
+    
+    
+</body>
+</html>

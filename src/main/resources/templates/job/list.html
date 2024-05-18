@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Việc làm</title>
+     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div th:replace="~{'home/header.html' :: body}"></div>
+
+    <div class="bg-gradient-to-l from-[#4aa143] to-[#2c3b5c] py-[36px]">
+        <div class="container">
+            <div th:replace="~{'home/search-form.html' :: body}"></div>
+            <div class="inline-block px-[18px] bg-[#365c65] py-[8px] rounded-[8px] mt-[20px] text-center text-white">
+                Tổng <span th:text="${totalElements}"  class="text-[green] font-bold"></span> kết quả
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Phần content -->
+    <div class="bg-[#f4f5f5]">
+        <div class="container ">
+            <!-- breadcrumb -->
+            <nav class="pt-[12px]">
+                <ul class="flex text-[17px]">
+                    <li><a th:href="@{/}" class="text-[green] font-[500] mr-[6px] hover:no-underline hover:text-[green]">Trang chủ</a></li>
+                    <span>/</span>
+                    <li class="mx-[6px]"><a th:href="@{/category/software}"  class="text-[green] font-[500] mr-[6px] hover:no-underline hover:text-[green]">Công nghệ phần mềm</a></li>
+                    <span>/</span>
+                    <li class="mx-[6px]">Java Developer</li>
+                </ul>
+            </nav>
+
+            
+            <div class="row">
+                <div class="col-sm-8 ">
+
+                    <!-- Danh sách công việc -->
+                    <div class="mb-[32px]">
+                        <div class="h-[360px] flex flex-col gap-[16px] bg-white items-center justify-center" th:if="${totalElements < 1}">
+                            <img th:src="@{/static/images/empty.webp}" />
+                            <p>Không tìm thấy việc làm phù hợp!</p>
+                        </div>
+                        <div  th:each="job : ${jobs}" th:if="${totalElements > 0}" class="flex p-[12px] mb-[16px] cursor-pointer hover:border-[green] bg-white rounded-[8px] border-[1px] border-solid border-[#f5f5f5] shadow-sm hover:bg-[#fff]">
+                            <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#f5f5f5] border-solid">
+                                <img class="w-[100%] rounded-[8px] " src="https://cdn-new.topcv.vn/unsafe/150x/https://static.topcv.vn/company_logos/JuHiMkCc5e5ieyWvd4fmob0gKLSXNXOG_1708317098____e2afbd959c86b1234e36ba08894d9476.jpg" />
+                            </div>
+
+                            <div class="flex flex-1 flex-col"> 
+                                    <div class="flex-1">
+                                        <a  th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" th:text="${job.title}" class="text-[17px] font-[500] text-[#555] leading-[19px] block mb-[8px] hover:text-[green]">Biên Tập Viên Nội Dung Video (Content Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà Nội</a>
+                                        <a  th:href="@{/cong-ty/{companyId}(companyId = ${job.company.id})}" class="text-[15px] text-[#555] font-[400]">CÔNG TY CỔ PHẦN MST ENTERTAINMENT</a>
+
+                                    </div>
+                                    <div class="flex mt-[8px]">
+                                        <p th:text="${job.address.province}" class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
+                                        </p>
+                                        <p class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]">Còn <strong th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"></strong> ngày để ứng tuyển</p>
+            
+                                    </div>
+                            </div>
+                            <div class="flex  flex-column items-end justify-between min-w-[150px]" >
+                                <p class="font-[500] text-[green]"><span th:text="${job.salaryStart}"></span> - <span th:text="${job.salaryEnd}"></span> triệu</p>
+                                <div class="flex gap-[10px]">
+                                    <a th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}" class="flex items-center opacity-[0.7] text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</a>
+                                    <button class="px-[6px] bg-[#effbef] rounded-[3px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                          </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Phần phân trang -->
+                    <div th:if="${#lists.size(jobs) > 0}" class="pagination">
+                        <ul class="flex items-center gap-[16px]">
+                            <li class="" th:if="${currentPage > 0}">
+                                <a class="block  px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green] " th:href="@{/viec-lam( page=${currentPage - 1} , keyword=${param.keyword} , addressId=${param.addressId} , experience = ${param.experience} , rangeSalary = ${param.rangeSalary})}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                                    </svg>
+                                    
+                                </a>
+                            </li>
+                            <li class="" th:each="page : ${#numbers.sequence(1, totalPages)}">
+                                <a th:if="${currentPage == page - 1}" class="block bg-[green] text-[#fff!important] px-[16px] rounded  py-[8px]  w-full h-full" th:href="@{/viec-lam( page=${page - 1},  keyword=${param.keyword} , addressId=${param.addressId} , experience = ${param.experience} , rangeSalary = ${param.rangeSalary})}" th:text="${page}"></a>
+                                <a th:if="${currentPage != page - 1}" class="block hover:bg-[#ccc] px-[16px] rounded  py-[8px]  w-full h-full" th:href="@{/viec-lam( page=${page - 1}, keyword=${param.keyword} , addressId=${param.addressId} , experience = ${param.experience} , rangeSalary = ${param.rangeSalary})}" th:text="${page}"></a>
+                            </li>
+                            <li th:if="${currentPage < totalPages - 1}">
+                                <a class="block  px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green]" th:href="@{/viec-lam( page=${currentPage + 1} , keyword=${param.keyword} , addressId=${param.addressId} , experience = ${param.experience} , rangeSalary = ${param.rangeSalary})}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                    
+                <div class="col-sm-4 px-[24px]">
+                    <!-- việc làm gợi ý -->
+                    <div class="bg-white rounded-[10px] px-[18px] py-[16px] ">
+                        <h4 class="text-[18px] ">Gợi ý việc làm phù hợp</h4>
+                        <div th:each="job : ${suggestJobsByUser}">
+                            <a th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" class="px-[8px] block shadow-md hover:bg-[#f5f5f5] py-[12px] cursor-pointer mb-[12px] rounded-[6px] border-[1px] border-solid border-[#ccc]">
+                                <div  class="flex">
+                                    <div class="w-[50px] flex items-center justify-center mr-[8px] h-[50px] flex-shrink-0 ">
+                                        <img class="w-full" th:src="${job.company.avatar}">
+
+                                    </div>
+                                    <div>
+                                        <h4 th:text="${job.title}" class="text-over overflow-hidden text-[15px] hover:text-[green] mb-[8px]"></h4>
+                                        <p th:text="${job.company.name}" class="text-over text-[13px]"></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between mt-[18px]">
+                                    <div class="flex gap-[10px]">
+                                        <p class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"><span th:text="${job.salaryStart}"></span> - <span th:text="${job.salaryEnd}"></span> triệu</p>
+                                        <p th:text="${job.address.province}" class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"></p>
+
+                                    </div>
+                                    <button class="px-[4px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                          </svg>
+                                    </button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+        </div>
+
+    </div>
+
+	
+    
+    
+    
+</body>
+</html>

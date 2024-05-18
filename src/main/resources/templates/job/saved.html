@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Việc làm</title>
+     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div th:replace="home/header.html :: body"></div>
+
+    
+    
+    <!-- Phần content -->
+    <div class="bg-[#f4f5f5]">
+        <div class="container ">
+            <div class="bg-gradient-to-l rounded-t-[8px] mb-[12px] from-[#4aa143] px-[36px] to-[#2c3b5c] py-[36px]">
+                <h4 class="text-white">Việc làm đã lưu</h4>
+                <p class="text-white max-w-[700px]">Xem lại danh sách những việc làm mà bạn đã lưu trước đó. Ứng tuyển ngay để không bỏ lỡ cơ hội nghề nghiệp dành cho bạn.</p>
+                
+            </div>
+            <div class="bg-white rounded-b-[8px] px-[16px] py-[12px]">
+                
+                <div class="my-[24px]">
+                    <p>Tìm thấy <span class="font-bold text-[green]" th:text="${#lists.size(savedJobs)}"></span> việc làm phù hợp với yêu cầu của bạn.</p>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-9 ">
+    
+                        <!-- Nếu không có -->
+                        <div class="flex flex-col items-center gap-[14px]" th:if="${#lists.size(savedJobs)} == 0">
+                            <img class="w-[30%]" th:src="@{/static/images/empty.webp}"/>
+                            <p>Bạn chưa lưu công việc nào !</p>
+                            <a th:href="@{/viec-lam}" class="bg-green-700 cursor-pointer text-white rounded-[8px] flex items-center justify-center h-[40px] w-[140px]">Tìm việc ngay</a>
+                        </div>
+
+                        <!-- Danh sách công việc -->
+                        <div th:each="job : ${savedJobs}" class="mb-[32px]">
+                            <div class="flex p-[12px]  b-[16px] cursor-pointer hover:border-[green] bg-white rounded-[8px] border-[1px] border-solid border-[#f5f5f5] shadow-sm hover:bg-[#fff]">
+                                <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#f5f5f5] border-solid">
+                                    <img class="w-[100%] rounded-[8px] " th:src="${job.company.avatar}" />
+                                </div>
+    
+                                <div>
+                                    <a th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" th:text="${job.title}" class="text-[17px] font-[500] text-[#344563] block mb-[6px] hover:text-[green]"></a>
+                                    <a th:href="@{/cong-ty/{companyId}(companyId=${job.company.id})}" th:text="${job.company.name}"  class="text-[15px] block text-[#344563] font-[400] hover:text-[green]"></a>
+                                    
+                                    <div class="flex gap-[12px] mt-[18px]">
+
+        
+                                        <p class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]">Còn <strong th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"></strong> ngày để ứng tuyển</p>
+        
+                                        <p th:text="${job.address.province}" class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-1 flex-column items-end justify-between min-w-[150px]" >
+                                    <p class="font-[500] text-[green]"><span th:text="${job.salaryStart}" class="text-[green]"></span> - <span class="text-[green]" th:text="${job.salaryEnd}"></span> triệu</p>
+                                    <div class="flex gap-[10px]">
+                                        <a th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}" class="opacity-[0.7] flex items-center text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</a>
+                                        <form th:action="@{/unsave-job}" method="post">
+                                            <input  type="hidden" name="jobId" th:value="${job.id}"/>
+                                            <button class="px-[6px] h-full bg-red-200 rounded-[3px]">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                                  </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                        
+                    <div class="col-sm-3 px-[24px]">
+                        <img src="https://www.topcv.vn/images/flash-job-intro-1.png" class="w-full rounded-[10px]" />
+                    </div>
+                </div>
+
+            </div>
+        
+    
+        </div>
+
+    </div>
+
+	
+    
+</body>
+</html>

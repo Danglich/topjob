@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Việc làm</title>
+     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div th:replace="home/header.html :: body"></div>
+
+    
+    
+    <!-- Phần content -->
+    <div class="bg-[#f4f5f5]">
+        <div class="container ">
+            <div class="bg-gradient-to-l rounded-t-[8px] mb-[12px] from-[#4aa143] px-[36px] to-[#2c3b5c] py-[36px]">
+                <h4 class="text-white">Việc làm tốt nhất</h4>
+                <p class="text-white">Tìm kiếm công việc mơ ước từ những cơ hội việc làm tốt nhất trên TopCV</p>
+                <div class="flex items-center mt-[24px] gap-[16px]">
+                    <div class="flex items-center  px-[8px]   rounded-[10px] bg-white gap-[6px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                          </svg>
+                          <span class="text-[green] text-[15px] font-[500]">Lương cao</span>
+                    </div>
+                    <div class="flex items-center px-[8px]   rounded-[10px] bg-white gap-[6px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                          </svg>
+                          <span class="text-[green] text-[15px] font-[500]">Phúc lợi hấp dẫn</span>
+                    </div>
+                    <div class="flex items-center px-[8px]   rounded-[10px] bg-white gap-[6px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                          </svg>
+                          <span class="text-[green] text-[15px] font-[500]">Môi trường chuyên nghiệp</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-b-[8px] px-[16px] py-[12px]">
+
+                <div th:replace="home/search-form.html :: body"></div>
+                
+                <div class="my-[24px]">
+                    <p>Tìm thấy <span class="font-bold text-[green]">88</span> việc làm phù hợp với yêu cầu của bạn.</p>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-9 ">
+    
+                        <!-- Danh sách công việc -->
+                        <div class="mb-[32px]">
+                            <div class="flex p-[12px] mb-[16px] cursor-pointer hover:border-[green] bg-white rounded-[8px] border-[1px] border-solid border-[#f5f5f5] shadow-sm hover:bg-[#fff]">
+                                <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#f5f5f5] border-solid">
+                                    <img class="w-[100%] rounded-[8px] " src="https://cdn-new.topcv.vn/unsafe/150x/https://static.topcv.vn/company_logos/JuHiMkCc5e5ieyWvd4fmob0gKLSXNXOG_1708317098____e2afbd959c86b1234e36ba08894d9476.jpg" />
+                                </div>
+    
+                                <div>
+                                    <h4 class="text-[17px] hover:text-[green]">Biên Tập Viên Nội Dung Video (Content Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà Nội</h4>
+                                    <h4 class="text-[15px] font-[400]">CÔNG TY CỔ PHẦN MST ENTERTAINMENT</h4>
+                                    <div class="flex gap-[12px] mt-[10px]">
+                                        <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Hà Nội</p>
+                                        <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Còn <strong>6</strong> ngày để ứng tuyển</p>
+                                        
+    
+                                    </div>
+                                </div>
+                                <div class="flex flex-column items-end justify-between min-w-[150px]" >
+                                    <p class="font-[500] text-[green]">10 - 12 triệu</p>
+                                    <div class="flex gap-[10px]">
+                                        <button class="opacity-[0.7] text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</button>
+                                        <button class="px-[6px] bg-[#effbef] rounded-[3px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
+                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                              </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex p-[12px] mb-[16px] cursor-pointer hover:border-[green] bg-white rounded-[8px] border-[1px] border-solid border-[#f5f5f5]  shadow-sm hover:bg-[#fff]">
+                                <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#f5f5f5] border-solid">
+                                    <img class="w-[100%] rounded-[8px] " src="https://cdn-new.topcv.vn/unsafe/150x/https://static.topcv.vn/company_logos/JuHiMkCc5e5ieyWvd4fmob0gKLSXNXOG_1708317098____e2afbd959c86b1234e36ba08894d9476.jpg" />
+                                </div>
+    
+                                <div>
+                                    <h4 class="text-[17px] hover:text-[green]">Biên Tập Viên Nội Dung Video (Content Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà Nội</h4>
+                                    <h4 class="text-[15px] font-[400]">CÔNG TY CỔ PHẦN MST ENTERTAINMENT</h4>
+                                    <div class="flex gap-[12px] mt-[10px]">
+                                        <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Hà Nội</p>
+                                        <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Còn <strong>6</strong> ngày để ứng tuyển</p>
+                                        
+    
+                                    </div>
+                                </div>
+                                <div class="flex flex-column items-end justify-between min-w-[150px]" >
+                                    <p class="font-[500] text-[green]">10 - 12 triệu</p>
+                                    <div class="flex gap-[10px]">
+                                        <button class="opacity-[0.7] text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</button>
+                                        <button class="px-[6px] bg-[#effbef] rounded-[3px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
+                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                              </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex p-[12px] mb-[16px] cursor-pointer hover:border-[green] bg-white rounded-[8px] border-[1px] border-solid border-[#f5f5f5] shadow-sm hover:bg-[#fff]">
+                                <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#f5f5f5] border-solid">
+                                    <img class="w-[100%] rounded-[8px] " src="https://cdn-new.topcv.vn/unsafe/150x/https://static.topcv.vn/company_logos/JuHiMkCc5e5ieyWvd4fmob0gKLSXNXOG_1708317098____e2afbd959c86b1234e36ba08894d9476.jpg" />
+                                </div>
+    
+                                <div>
+                                    <h4 class="text-[17px] hover:text-[green]">Biên Tập Viên Nội Dung Video (Content Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà Nội</h4>
+                                    <h4 class="text-[15px] font-[400]">CÔNG TY CỔ PHẦN MST ENTERTAINMENT</h4>
+                                    <div class="flex gap-[12px] mt-[10px]">
+                                        <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Hà Nội</p>
+                                        <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Còn <strong>6</strong> ngày để ứng tuyển</p>
+                                        
+    
+                                    </div>
+                                </div>
+                                <div class="flex flex-column items-end justify-between min-w-[150px]" >
+                                    <p class="font-[500] text-[green]">10 - 12 triệu</p>
+                                    <div class="flex gap-[10px]">
+                                        <button class="opacity-[0.7] text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</button>
+                                        <button class="px-[6px] bg-[#effbef] rounded-[3px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
+                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                              </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="col-sm-3 px-[24px]">
+                        <img src="https://www.topcv.vn/images/flash-job-intro-1.png" class="w-full rounded-[10px]" />
+                    </div>
+                </div>
+
+            </div>
+        
+    
+        </div>
+
+    </div>
+
+	
+    
+</body>
+</html>

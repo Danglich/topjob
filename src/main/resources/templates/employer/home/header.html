@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-[#212f3f] fixed w-full h-[60px] top-[0] shadow">
+        <div class="container px-[28px] flex justify-between items-center h-full">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img th:src="@{/static/images/logo_dark.webp}" alt="Logo" class="h-8 w-auto">
+            </div>
+            <!-- Navigation -->
+            <nav>
+                <ul class="flex items-center space-x-6">
+                    <li><a href="#" class="text-white px-[10px] py-[4px] rounded-[10px] bg-[#3b546f] hover:opacity-[0.9] "><i class="fas fa-plus-circle"></i> Đăng tin</a></li>
+                    <li><a href="#" class="text-white px-[10px] py-[4px] rounded-[10px] bg-[#3b546f] hover:opacity-[0.9] "><i class="fas fa-bell"></i> Thông báo</a></li>
+                    <li><a href="#" class="text-white px-[10px] py-[4px] rounded-[10px] bg-[#3b546f] hover:opacity-[0.9]  relative"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span></a></li>
+                    <div class="p-[6px] cursor-pointer group relative rounded-[34px] bg-[#3b546f]">
+                        <img th:src="@{/static/images/avatar-default.jpg}" class="w-[28px] h-[28px] rounded-full"/> 
+                        <div class="absolute rounded-[10px] min-w-[200px] right-[0] shadow-sm p-[16px] group-hover:block hidden bg-white top-[36px]">
+                            <div class="py-[6px] px-[6px]  hover:bg-gray-200 rounded-[4px] cursor-pointer">
+                                <form th:action="@{/logout}" method="post" >
+                                    <button >Đăng xuất</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    
+</body>
+</html>

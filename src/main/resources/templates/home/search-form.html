@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link th:href="@{static/style/output.css}" rel="stylesheet"  />
+</head>
+<body>
+  <form th:action="@{/viec-lam}" method="GET" class="form-inline seach-form justify-between items-center">
+    <div class="form-group">
+      <label class="sr-only" for="search"><i class="glyphicon glyphicon-search"></i></label>
+      <input type="text" id="search" th:value="${param.keyword}" name="keyword" class="form-control" placeholder="Nhập nội dung tìm kiếm">
+    </div>
+  
+    <div class="form-group">
+      <label class="sr-only" for="location"><i class="glyphicon glyphicon-map-marker"></i></label>
+      <select id="location" name="addressId" class="form-control">
+        <option value="" >Tất cả thành phố</option>
+        <option th:each="address : ${addresses}" th:selected="${@compareUtils.compareIntAndString(address.id ,param.addressId)}"
+            th:value="${address.id}" th:text="${address.province}">
+        </option>
+        
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label class="sr-only" for="experience"><i class="glyphicon glyphicon-briefcase"></i></label>
+      <select id="experience" name="experience" class="form-control">
+        <option value="">Tất cả kinh nghiệm</option>
+        <option th:each="experience : ${experiences}"  th:selected="${@compareUtils.compareEnumAndString(experience ,param.experience)}"
+            th:value="${experience}" th:text="${experience.describe}">
+        </option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label class="sr-only" for="salary"><i class="glyphicon glyphicon-usd"></i></label>
+      <select id="salary" name="salaryRange" class="form-control">
+        <option class="h-[32px]" value="">Tất cả mức lương</option>
+        <option th:each="range : ${salaryRanges}"  th:selected="${@compareUtils.compareEnumAndString(range ,param.salaryRange)}"
+            th:value="${range}" th:text="${range.detail}">
+        </option>
+      </select>
+    </div>
+  
+    <button type="submit" class="bg-green-700 hover:opacity-[0.9] cursor-pointer rounded-[8px] px-[16px] text-white h-[42px]">Tìm việc</button>
+</form>
+
+    
+    
+</body>
+</html>
