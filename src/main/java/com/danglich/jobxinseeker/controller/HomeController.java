@@ -33,7 +33,13 @@ public class HomeController {
 	private final CompanyService companyService;
 	private final AddressService addressService;
 	
-	@GetMapping("/")
+	@GetMapping("/") 
+	public String sayHello() {
+		
+		return "Hello world";
+	}
+	
+	@GetMapping("/home")
 	public String showHome(Authentication authentication, Model theModel) {
 		
 		log.info("Acessing home page");
