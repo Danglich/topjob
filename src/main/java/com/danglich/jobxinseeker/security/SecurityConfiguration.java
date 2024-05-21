@@ -56,6 +56,7 @@ public class SecurityConfiguration {
 				configurer ->
 					configurer
 						.requestMatchers("/").permitAll()
+						.requestMatchers("/home").permitAll()
 						.requestMatchers("/auth/**").permitAll()
 						.requestMatchers("/oauth/**").permitAll()
 						.requestMatchers("/static/**").permitAll()
