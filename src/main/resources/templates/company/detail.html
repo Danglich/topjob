@@ -1,292 +1,612 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="${company.name}"></title>
-     <link th:href="@{/static/style/home.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/static/style/output.css}" rel="stylesheet"  />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <meta name="_csrf" th:content="${_csrf.token}" />
-    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-</head>
-<body>
+    <head>
+        <title th:text="${company.name}"></title>
+        <link
+            th:href="@{/static/style/home.css}"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link th:href="@{/static/style/output.css}" rel="stylesheet" />
+        <link
+            rel="icon"
+            href="https://static.topcv.vn/v4/image/favicon.ico"
+            type="image/x-icon"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    </head>
+    <body>
+        <!-- Header -->
+        <div th:replace="home/header.html :: body"></div>
+        <!-- Phần content -->
+        <div class="bg-[#f4f5f5] pb-[48px]">
+            <div class="container">
+                <!-- breadcrumb -->
+                <nav class="pt-[18px]">
+                    <ul class="flex text-[17px]">
+                        <li>
+                            <a
+                                th:href="@{/cong-ty}"
+                                class="text-[green] font-[500] mr-[6px] hover:no-underline hover:text-[green]"
+                                >Danh sách công ty</a
+                            >
+                        </li>
+                        <span>/</span>
+                        <li th:text="${company.name}" class="mx-[6px]"></li>
+                    </ul>
+                </nav>
 
-    <!-- Header -->
-    <div th:replace="home/header.html :: body"></div>
-    <!-- Phần content -->
-    <div class="bg-[#f4f5f5] pb-[48px]">
-        <div class="container ">
-            <!-- breadcrumb -->
-            <nav class="pt-[18px]">
-                <ul class="flex text-[17px]">
-                    <li><a th:href="@{/cong-ty}" class="text-[green] font-[500] mr-[6px] hover:no-underline hover:text-[green]">Danh sách công ty</a></li>
-                    <span>/</span>
-                    <li th:text="${company.name}" class="mx-[6px]"></li>
-                </ul>
-            </nav>
-
-            <!-- Banner -->
-            <div class=" rounded-[8px]">
-                <div class="h-[224px]">
-                    <img class="h-full rounded-t-[8px] w-full object-cover object-center" th:src="${company.banner}" />
-
-                </div>
-                <div class="flex relative py-[32px] items-center justify-between rounded-b-[8px] bg-gradient-to-l from-[#4aa143] to-[#2c3b5c]">
-                    <div class="flex-1"></div>
-                    <div class="flex-[2]">
-                        <h4 th:text="${company.name}" class="uppercase text-white font-bold text-[17px]"></h4>
-                        <div class="flex gap-[16px] mt-[24px]">
-                            <div class="flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-browser-chrome" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M16 8a8 8 0 0 1-7.022 7.94l1.902-7.098a3 3 0 0 0 .05-1.492A3 3 0 0 0 10.237 6h5.511A8 8 0 0 1 16 8M0 8a8 8 0 0 0 7.927 8l1.426-5.321a3 3 0 0 1-.723.255 3 3 0 0 1-1.743-.147 3 3 0 0 1-1.043-.7L.633 4.876A8 8 0 0 0 0 8m5.004-.167L1.108 3.936A8.003 8.003 0 0 1 15.418 5H8.066a3 3 0 0 0-1.252.243 2.99 2.99 0 0 0-1.81 2.59M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
-                                  </svg>
-                                <span class="ml-[16px] text-white">https://llv.edu.vn/vi/</span>
-                            </div>
-
-                            <div class="flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-building" viewBox="0 0 16 16">
-                                    <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"/>
-                                  </svg>
-                                <span th:text="${company.scale}" class="ml-[16px] text-white"></span>
-                            </div>
-
-                            <div class="flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-person-heart" viewBox="0 0 16 16">
-                                    <path d="M9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4m13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z"/>
-                                  </svg>
-                                <span class="ml-[16px] text-white"><span class="text-white" th:text="${#lists.size(company.followers)}"></span> người theo dõi</span>
-                            </div>
-                        </div>
+                <!-- Banner -->
+                <div class="rounded-[8px]">
+                    <div class="h-[224px]">
+                        <img
+                            class="h-full rounded-t-[8px] w-full object-cover object-center"
+                            th:src="${company.banner}"
+                        />
                     </div>
-                    <form method="post" action="#" th:action="@{/follow-company}"  th:if="${!isFollowed}" class="flex-1 flex items-center justify-end">
-                    	<input th:value="${company.id}" type="hidden" name="companyId" />
-                        <button  class="h-[46px] mr-[36px] w-[150px] font-[500]  rounded-[8px] bg-white text-green-700 hover:bg-[#efffed!important]">Theo dõi công ty</button>
-                    </form>
-                    <form method="post" action="#" th:action="@{/unfollow-company}"  th:if="${isFollowed}" class="flex-1 flex items-center justify-end">
-                    	<input th:value="${company.id}" type="hidden" name="companyId" />
-                        <button  class="h-[46px] mr-[36px] w-[150px] font-[500]  rounded-[8px] bg-white text-green-700 hover:bg-[#efffed!important]">Hủy theo dõi</button>
-                    </form>
-
-                    <div class="absolute flex items-center justify-center w-[180px] h-[180px] bg-white rounded-full left-[36px] top-[-90px]">
-                        <img class="w-[80%] h-[80%] object-contain object-center rounded-full"  th:src="${company.avatar}" />
-                    </div>
-
-                </div>
-            </div>
-    
-            <div class="mt-[24px]">
-                <div class="row">
-    
-                    <div class="col-sm-8 ">
-                       
-                        <div >
-                            <div class="py-[14px] px-[24px] rounded-t-[10px] bg-gradient-to-l from-[#4aa143] to-[#2c3b5c]">
-                                <h4 class="text-white text-[18px] m-[0]">Giới thiệu công ty</h4>
-                            </div>
-                            <div class="px-[24px] pt-[16px] pb-[48px] bg-white rounded-b-[10px]">
-                                <p th:text="${company.description}" class="text-[16px]"></p>
-                            </div>
-                        </div>
-                        
-    
-                        <!-- jobs -->
-                        <div class="bg-white rounded-[10px] mt-[28px] pb-[48px]">
-                            <div class="py-[14px]  px-[24px] rounded-t-[10px] bg-gradient-to-l from-[#4aa143] to-[#2c3b5c]">
-                                <h4 class="text-white text-[18px] m-[0]">Tuyển dụng</h4>
-                            </div>
-    
-                            <!-- Phần tìm kiếm -->
-                            <form method="get" class="flex gap-[24px] mt-[24px] px-[24px]">
-                                <div class="flex px-[12px] py-[7px] border-[1px] border-[solid] border-gray-200 rounded-[6px]">
-                                    <div class="px-[8px] flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                          </svg>
-                                    </div>
-                                    <div class="flex-1 w-[300px] pr-[12px]">
-                                        <input  name="keyword" th:value="${param.keyword}" type="text"class="w-full outline-none h-full " placeholder="Tên công việc , vị trí ứng tuyển"/>
-                                    </div>
+                    <div
+                        class="flex relative py-[32px] items-center justify-between rounded-b-[8px] bg-gradient-to-l from-[#4aa143] to-[#2c3b5c]"
+                    >
+                        <div class="flex-1"></div>
+                        <div class="flex-[2]">
+                            <h4
+                                th:text="${company.name}"
+                                class="uppercase text-white font-bold text-[17px]"
+                            ></h4>
+                            <div class="flex gap-[16px] mt-[24px]">
+                                <div class="flex items-center justify-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="#fff"
+                                        class="bi bi-browser-chrome"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M16 8a8 8 0 0 1-7.022 7.94l1.902-7.098a3 3 0 0 0 .05-1.492A3 3 0 0 0 10.237 6h5.511A8 8 0 0 1 16 8M0 8a8 8 0 0 0 7.927 8l1.426-5.321a3 3 0 0 1-.723.255 3 3 0 0 1-1.743-.147 3 3 0 0 1-1.043-.7L.633 4.876A8 8 0 0 0 0 8m5.004-.167L1.108 3.936A8.003 8.003 0 0 1 15.418 5H8.066a3 3 0 0 0-1.252.243 2.99 2.99 0 0 0-1.81 2.59M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"
+                                        />
+                                    </svg>
+                                    <span class="ml-[16px] text-white"
+                                        >https://llv.edu.vn/vi/</span
+                                    >
                                 </div>
-                                <button class="rounded-[6px] px-[16px] bg-green-600 text-white">Tìm kiếm</button>
-                            </form>
-    
-                            <!-- Không tìm thấy kết quả -->
-                            <div th:if="${#lists.size(jobs) == 0}" class="h-[340px] flex items-center justify-center">
-                                <img th:src="@{/static/images/empty.webp}" />
+
+                                <div class="flex items-center justify-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="#fff"
+                                        class="bi bi-building"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"
+                                        />
+                                        <path
+                                            d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"
+                                        />
+                                    </svg>
+                                    <span
+                                        th:text="${company.scale}"
+                                        class="ml-[16px] text-white"
+                                    ></span>
+                                </div>
+
+                                <div class="flex items-center justify-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="#fff"
+                                        class="bi bi-person-heart"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M9 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h10s1 0 1-1-1-4-6-4-6 3-6 4m13.5-8.09c1.387-1.425 4.855 1.07 0 4.277-4.854-3.207-1.387-5.702 0-4.276Z"
+                                        />
+                                    </svg>
+                                    <span class="ml-[16px] text-white"
+                                        ><span
+                                            class="text-white"
+                                            th:text="${#lists.size(company.followers)}"
+                                        ></span>
+                                        người theo dõi</span
+                                    >
+                                </div>
                             </div>
-    
-                            <!-- Danh sách việc làm -->
-                            <div class="mt-[18px] px-[24px]">
-                                <div th:each="job : ${jobs}" class="flex mb-[16px] p-[12px] cursor-pointer rounded-[8px] border-[1px] border-solid border-[#ccc] hover:bg-[#f4f5f5]">
-                                    <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#ccc] border-solid">
-                                        <img class="w-[100%] rounded-[8px] " src="https://cdn-new.topcv.vn/unsafe/150x/https://static.topcv.vn/company_logos/JuHiMkCc5e5ieyWvd4fmob0gKLSXNXOG_1708317098____e2afbd959c86b1234e36ba08894d9476.jpg" />
-                                    </div>
-    
-                                    <div class="flex-[1]">
-                                        <a th:text="${job.title}" th:href="@{/viec-lam/{jobId}(jobId = ${job.id})}"  class="text-[17px] text-[#555] leading-[19px] block mb-[10px] font-[500] hover:text-[green]">Biên Tập Viên Nội Dung Video (Content Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà Nội</a>
-                                        <a th:href="@{/cong-ty/{companyId}(companyId = ${job.company.id})}" th:text="${job.company.name}" class="text-[15px] text-[#555] font-[400]">CÔNG TY CỔ PHẦN MST ENTERTAINMENT</a>
-                                        <div class="flex gap-[12px] mt-[10px]">
-                                            <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Hà Nội</p>
-                                            <p class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]">Còn <strong>6</strong> ngày để ứng tuyển</p>
+                        </div>
+                        <form
+                            method="post"
+                            action="#"
+                            th:action="@{/follow-company}"
+                            th:if="${!isFollowed}"
+                            class="flex-1 flex items-center justify-end"
+                        >
+                            <input
+                                th:value="${company.id}"
+                                type="hidden"
+                                name="companyId"
+                            />
+                            <button
+                                class="h-[46px] mr-[36px] w-[150px] font-[500] rounded-[8px] bg-white text-green-700 hover:bg-[#efffed!important]"
+                            >
+                                Theo dõi công ty
+                            </button>
+                        </form>
+                        <form
+                            method="post"
+                            action="#"
+                            th:action="@{/unfollow-company}"
+                            th:if="${isFollowed}"
+                            class="flex-1 flex items-center justify-end"
+                        >
+                            <input
+                                th:value="${company.id}"
+                                type="hidden"
+                                name="companyId"
+                            />
+                            <button
+                                class="h-[46px] mr-[36px] w-[150px] font-[500] rounded-[8px] bg-white text-green-700 hover:bg-[#efffed!important]"
+                            >
+                                Hủy theo dõi
+                            </button>
+                        </form>
+
+                        <div
+                            class="absolute flex items-center justify-center w-[180px] h-[180px] bg-white rounded-full left-[36px] top-[-90px]"
+                        >
+                            <img
+                                class="w-[80%] h-[80%] object-contain object-center rounded-full"
+                                th:src="${company.avatar}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-[24px]">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div>
+                                <div
+                                    class="py-[14px] px-[24px] rounded-t-[10px] bg-gradient-to-l from-[#4aa143] to-[#2c3b5c]"
+                                >
+                                    <h4 class="text-white text-[18px] m-[0]">
+                                        Giới thiệu công ty
+                                    </h4>
+                                </div>
+                                <div
+                                    class="px-[24px] pt-[16px] pb-[48px] bg-white rounded-b-[10px]"
+                                >
+                                    <p
+                                        th:text="${company.description}"
+                                        class="text-[16px]"
+                                    ></p>
+                                </div>
+                            </div>
+
+                            <!-- jobs -->
+                            <div
+                                class="bg-white rounded-[10px] mt-[28px] pb-[48px]"
+                            >
+                                <div
+                                    class="py-[14px] px-[24px] rounded-t-[10px] bg-gradient-to-l from-[#4aa143] to-[#2c3b5c]"
+                                >
+                                    <h4 class="text-white text-[18px] m-[0]">
+                                        Tuyển dụng
+                                    </h4>
+                                </div>
+
+                                <!-- Phần tìm kiếm -->
+                                <form
+                                    method="get"
+                                    class="flex gap-[24px] mt-[24px] px-[24px]"
+                                >
+                                    <div
+                                        class="flex px-[12px] py-[7px] border-[1px] border-[solid] border-gray-200 rounded-[6px]"
+                                    >
+                                        <div
+                                            class="px-[8px] flex items-center justify-center"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="currentColor"
+                                                class="bi bi-search"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div class="flex-1 w-[300px] pr-[12px]">
+                                            <input
+                                                name="keyword"
+                                                th:value="${param.keyword}"
+                                                type="text"
+                                                class="w-full outline-none h-full"
+                                                placeholder="Tên công việc , vị trí ứng tuyển"
+                                            />
                                         </div>
                                     </div>
-                                    <div class="flex flex-column items-end justify-between min-w-[150px]" >
-                                        <p class="font-[500] text-[green]">10 - 12 triệu</p>
-                                        <div class="flex gap-[10px]">
-                                            <a th:href="@{/ung-tuyen/{jobId}(jobId = ${job.id})}" class="opacity-[0.7] flex items-center text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</a>
-                                            <button class="px-[6px] bg-[#effbef] rounded-[3px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-heart" viewBox="0 0 16 16">
-                                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                    <button
+                                        class="rounded-[6px] px-[16px] bg-green-600 text-white"
+                                    >
+                                        Tìm kiếm
+                                    </button>
+                                </form>
+
+                                <!-- Không tìm thấy kết quả -->
+                                <div
+                                    th:if="${#lists.size(jobs) == 0}"
+                                    class="h-[340px] flex items-center justify-center"
+                                >
+                                    <img
+                                        th:src="@{/static/images/empty.webp}"
+                                    />
+                                </div>
+
+                                <!-- Danh sách việc làm -->
+                                <div class="mt-[18px] px-[24px]">
+                                    <div
+                                        th:each="job : ${jobs}"
+                                        class="flex mb-[16px] p-[12px] cursor-pointer rounded-[8px] border-[1px] border-solid border-[#ccc] hover:bg-[#f4f5f5]"
+                                    >
+                                        <div
+                                            class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#ccc] border-solid"
+                                        >
+                                            <img
+                                                class="w-[100%] rounded-[8px]"
+                                                src="https://cdn-new.topcv.vn/unsafe/150x/https://static.topcv.vn/company_logos/JuHiMkCc5e5ieyWvd4fmob0gKLSXNXOG_1708317098____e2afbd959c86b1234e36ba08894d9476.jpg"
+                                            />
+                                        </div>
+
+                                        <div class="flex-[1]">
+                                            <a
+                                                th:text="${job.title}"
+                                                th:href="@{/viec-lam/{jobId}(jobId = ${job.id})}"
+                                                class="text-[17px] text-[#555] leading-[19px] block mb-[10px] font-[500] hover:text-[green]"
+                                                >Biên Tập Viên Nội Dung Video
+                                                (Content Creator), Thu Nhập Lên
+                                                Đến 20 Triệu Tại Hà Nội</a
+                                            >
+                                            <a
+                                                th:href="@{/cong-ty/{companyId}(companyId = ${job.company.id})}"
+                                                th:text="${job.company.name}"
+                                                class="text-[15px] text-[#555] font-[400]"
+                                                >CÔNG TY CỔ PHẦN MST
+                                                ENTERTAINMENT</a
+                                            >
+                                            <div
+                                                class="flex gap-[12px] mt-[10px]"
+                                            >
+                                                <p
+                                                    class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]"
+                                                >
+                                                    Hà Nội
+                                                </p>
+                                                <p
+                                                    class="text-[13px] px-[12px] rounded-[4px] bg-[#e9eaec]"
+                                                >
+                                                    Còn <strong>6</strong> ngày
+                                                    để ứng tuyển
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex flex-column items-end justify-between min-w-[150px]"
+                                        >
+                                            <p class="font-[500] text-[green]">
+                                                10 - 12 triệu
+                                            </p>
+                                            <div class="flex gap-[10px]">
+                                                <a
+                                                    th:href="@{/ung-tuyen/{jobId}(jobId = ${job.id})}"
+                                                    class="opacity-[0.7] flex items-center text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]"
+                                                    >Ứng tuyển</a
+                                                >
+                                                <button
+                                                    class="px-[6px] bg-[#effbef] rounded-[3px]"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="16"
+                                                        height="16"
+                                                        fill="#008000"
+                                                        class="bi bi-heart"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <path
+                                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Phần phân trang -->
+                                <div
+                                    th:if="${#lists.size(jobs) > 0}"
+                                    class="pagination"
+                                >
+                                    <ul class="flex items-center gap-[16px]">
+                                        <li class="" th:if="${currentPage > 0}">
+                                            <a
+                                                class="block px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green]"
+                                                th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${currentPage - 1} , keyword=${param.keyword})}"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="green"
+                                                    class="bi bi-chevron-left"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+                                                    />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li
+                                            class=""
+                                            th:each="page : ${#numbers.sequence(1, totalPages)}"
+                                        >
+                                            <a
+                                                th:if="${currentPage == page - 1}"
+                                                class="block bg-[green] text-[#fff!important] px-[16px] rounded py-[8px] w-full h-full"
+                                                th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${page - 1},  keyword=${param.keyword})}"
+                                                th:text="${page}"
+                                            ></a>
+                                            <a
+                                                th:if="${currentPage != page - 1}"
+                                                class="block hover:bg-[#ccc] px-[16px] rounded py-[8px] w-full h-full"
+                                                th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${page - 1}, keyword=${param.keyword})}"
+                                                th:text="${page}"
+                                            ></a>
+                                        </li>
+                                        <li
+                                            th:if="${currentPage < totalPages - 1}"
+                                        >
+                                            <a
+                                                class="block px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green]"
+                                                th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${currentPage + 1} , keyword=${param.keyword})}"
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="green"
+                                                    class="bi bi-chevron-right"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+                                                    />
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Companies in the same field -->
+                            <div
+                                class="px-[24px] bg-white py-[16px] rounded-[10px] mt-[24px]"
+                            >
+                                <div class="flex items-center mb-[20px]">
+                                    <div
+                                        class="bg-[green] h-[26px] w-[4px] mr-[12px]"
+                                    ></div>
+                                    <h4 class="text-[20px] font-bold my-[0]">
+                                        Top công ty cùng lĩnh vực
+                                    </h4>
+                                </div>
+
+                                <!-- List companies -->
+                                <div>
+                                    <a
+                                        th:href="@{/cong-ty/{companyId}(companyId = ${company.id})}"
+                                        th:each="company : ${suggestCompanies}"
+                                        class="flex mb-[16px] gap-[24px] cursor-pointer px-[12px] py-[18px] rounded-[8px] border-[1px] border-solid border-[#ccc] hover:border-[green!important] items-center justify-between"
+                                    >
+                                        <div
+                                            class="w-[80px] flex-shrink-0 flex items-center"
+                                        >
+                                            <img
+                                                class="w-full object-contain"
+                                                th:src="${company.avatar}"
+                                            />
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4
+                                                th:text="${company.name}"
+                                                class="text-[17px] font-bold hover:text-green-700"
+                                            ></h4>
+                                            <span
+                                                class="px-[12px] py-[3px] font-[400] rounded-[3px] bg-[#f4f5f5] text-[14px]"
+                                                ><span
+                                                    th:text="${#lists.size(company.jobs)}"
+                                                    class="font-[500]"
+                                                    >7</span
+                                                >
+                                                việc làm</span
+                                            >
+                                        </div>
+                                        <button
+                                            class="h-[40px] px-[24px] rounded-[4px] border-[1px] border-solid border-green-700"
+                                        >
+                                            Theo dõi
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <!-- việc làm gợi ý -->
+                            <div
+                                class="bg-white rounded-[10px] px-[18px] py-[16px]"
+                            >
+                                <h4 class="text-[18px]">
+                                    Gợi ý việc làm phù hợp
+                                </h4>
+                                <div>
+                                    <div
+                                        th:each="job : ${suggestJobs}"
+                                        class="px-[8px] py-[12px] cursor-pointer mb-[12px] rounded-[6px] border-[1px] border-solid border-[#ccc]"
+                                    >
+                                        <div class="flex">
+                                            <div
+                                                class="w-[50px] flex items-center justify-center mr-[8px] h-[50px] flex-shrink-0"
+                                            >
+                                                <img
+                                                    class="w-full"
+                                                    th:src="${job.company.avatar}"
+                                                />
+                                            </div>
+                                            <div>
+                                                <a
+                                                    th:href="@{/viec-lam/{jobId}(jobId = ${job.id})}"
+                                                    th:text="${job.title}"
+                                                    class="text-over overflow-hidden text-[16px] font-[500] text-[#355555] hover:text-[green] mb-[8px]"
+                                                ></a>
+                                                <p
+                                                    th:text="${job.company.name}"
+                                                    class="text-over text-[13px]"
+                                                ></p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex items-center justify-between mt-[18px]"
+                                        >
+                                            <div class="flex gap-[10px]">
+                                                <p
+                                                    class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"
+                                                >
+                                                    <span
+                                                        th:text="${job.salaryStart}"
+                                                    ></span>
+                                                    -
+                                                    <span
+                                                        th:text="${job.salaryEnd}"
+                                                    ></span>
+                                                    triệu
+                                                </p>
+                                                <p
+                                                    th:text="${job.address.province}"
+                                                    class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"
+                                                ></p>
+                                            </div>
+                                            <button class="px-[4px]">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="currentColor"
+                                                    class="bi bi-heart"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path
+                                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                                                    />
                                                 </svg>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Phần phân trang -->
-                            <div th:if="${#lists.size(jobs) > 0}" class="pagination">
-                                <ul class="flex items-center gap-[16px]">
-                                    <li class="" th:if="${currentPage > 0}">
-                                        <a class="block  px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green] " th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${currentPage - 1} , keyword=${param.keyword})}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                                            </svg>
-                                            
-                                        </a>
-                                    </li>
-                                    <li class="" th:each="page : ${#numbers.sequence(1, totalPages)}">
-                                        <a th:if="${currentPage == page - 1}" class="block bg-[green] text-[#fff!important] px-[16px] rounded  py-[8px]  w-full h-full" th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${page - 1},  keyword=${param.keyword})}" th:text="${page}"></a>
-                                        <a th:if="${currentPage != page - 1}" class="block hover:bg-[#ccc] px-[16px] rounded  py-[8px]  w-full h-full" th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${page - 1}, keyword=${param.keyword})}" th:text="${page}"></a>
-                                    </li>
-                                    <li th:if="${currentPage < totalPages - 1}">
-                                        <a class="block  px-[16px] py-[8px] rounded hover:bg-[#ccc] border border-[green]" th:href="@{/cong-ty/{companyId}(companyId = ${company.id} , page=${currentPage + 1} , keyword=${param.keyword})}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-    
-                        <!-- Companies in the same field -->
-                        <div class="px-[24px] bg-white py-[16px] rounded-[10px] mt-[24px]">
-                            <div class="flex items-center mb-[20px]">
-                                <div class="bg-[green] h-[26px] w-[4px] mr-[12px]"></div>
-                                <h4 class="text-[20px] font-bold my-[0]">Top công ty cùng lĩnh vực</h4>
-                            </div>
-    
-                            <!-- List companies -->
-                            <div>
-                                <a th:href="@{/cong-ty/{companyId}(companyId = ${company.id})}" th:each="company : ${suggestCompanies}" class="flex mb-[16px] gap-[24px] cursor-pointer px-[12px] py-[18px] rounded-[8px] border-[1px] border-solid border-[#ccc] hover:border-[green!important] items-center justify-between">
-                                    <div class="w-[80px] flex-shrink-0 flex items-center">
-                                        <img class="w-full object-contain"  th:src="${company.avatar}" />
-    
-                                    </div>
-                                    <div class="flex-1">
-                                        <h4 th:text="${company.name}" class="text-[17px] font-bold hover:text-green-700"></h4>
-                                        <span class="px-[12px] py-[3px] font-[400] rounded-[3px] bg-[#f4f5f5] text-[14px]"><span th:text="${#lists.size(company.jobs)}" class="font-[500]">7</span> việc làm</span>
-                                    </div>
-                                    <button class="h-[40px] px-[24px] rounded-[4px] border-[1px] border-solid border-green-700">
-                                        Theo dõi 
-                                    </button>
-                                </a>
-                            </div>
-    
-    
-                        </div>
-                    </div>
-    
-                        
-                    <div class="col-sm-4">
-                        
-                        <!-- việc làm gợi ý -->
-                        <div class="bg-white rounded-[10px] px-[18px] py-[16px] ">
-                            <h4 class="text-[18px] ">Gợi ý việc làm phù hợp</h4>
-                            <div>
-                                <div th:each="job : ${suggestJobs}" class="px-[8px] py-[12px] cursor-pointer mb-[12px] rounded-[6px] border-[1px] border-solid border-[#ccc]">
-                                    <div  class="flex">
-                                        <div class="w-[50px] flex items-center justify-center mr-[8px] h-[50px] flex-shrink-0 ">
-                                            <img class="w-full" th:src="${job.company.avatar}">
-    
-                                        </div>
-                                        <div>
-                                            <a th:href="@{/viec-lam/{jobId}(jobId = ${job.id})}" th:text="${job.title}" class="text-over overflow-hidden text-[16px] font-[500] text-[#355555] hover:text-[green] mb-[8px]"></a>
-                                            <p th:text="${job.company.name}" class="text-over text-[13px]"></p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-[18px]">
-                                        <div class="flex gap-[10px]">
-                                            <p class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"><span th:text="${job.salaryStart}"></span> - <span th:text="${job.salaryEnd}"></span> triệu</p>
-                                            <p th:text="${job.address.province}" class="text-[13px] px-[8px] rounded-[4px] bg-[#e4e4e4]"></p>
-    
-                                        </div>
-                                        <button class="px-[4px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                                              </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
-
-    <!-- Thông báo -->
-    <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header bg-[green!important]">
-            <strong  class="mr-auto text-[#fff!important]">Thông báo</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span class="text-[20px] text-white" aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">
-            Theo dõi thành công!
-          </div>
+        <!-- Thông báo -->
+        <div
+            id="toastContainer"
+            class="toast-container position-fixed top-0 end-0 p-3"
+        >
+            <div
+                id="toast"
+                class="toast hide"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+            >
+                <div class="toast-header bg-[green!important]">
+                    <strong class="mr-auto text-[#fff!important]"
+                        >Thông báo</strong
+                    >
+                    <button
+                        type="button"
+                        class="ml-2 mb-1 close"
+                        data-dismiss="toast"
+                        aria-label="Close"
+                    >
+                        <span class="text-[20px] text-white" aria-hidden="true"
+                            >&times;</span
+                        >
+                    </button>
+                </div>
+                <div class="toast-body">Theo dõi thành công!</div>
+            </div>
         </div>
-      </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script th:inline="javascript">
+            var csrfToken = document
+                .querySelector('meta[name="_csrf"]')
+                .getAttribute('content');
+            var csrfHeader = document
+                .querySelector('meta[name="_csrf_header"]')
+                .getAttribute('content');
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script  th:inline="javascript">
-        
-        var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-        var csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-
-        var headers = {
-            'Content-Type': 'application/json',
-            [csrfHeader]: csrfToken
-        };
-
-        function handleFollowCompany(companyId) {
-            var data = {
-                companyId: companyId
+            var headers = {
+                'Content-Type': 'application/json',
+                [csrfHeader]: csrfToken,
             };
-            axios.post("http://localhost:8080/follow-company", companyId , { headers: headers })
-            .then(function(response) {
 
-                var toast = document.getElementById('toast');
-               // toast.classList.add("block")
-                var toastInstance = new bootstrap.Toast(toast);
-                toastInstance.show();
-            })
-            .catch(function(error) {
-              console.error(error);
-              // Xử lý lỗi
-            });
-        }
-    
-      </script>
-    
-</body>
-
-
+            function handleFollowCompany(companyId) {
+                var data = {
+                    companyId: companyId,
+                };
+                axios
+                    .post('http://localhost:8080/follow-company', companyId, {
+                        headers: headers,
+                    })
+                    .then(function (response) {
+                        var toast = document.getElementById('toast');
+                        // toast.classList.add("block")
+                        var toastInstance = new bootstrap.Toast(toast);
+                        toastInstance.show();
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                        // Xử lý lỗi
+                    });
+            }
+        </script>
+    </body>
 </html>

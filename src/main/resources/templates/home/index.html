@@ -1,238 +1,441 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Tìm kiếm việc làm</title>
-    <link th:href="@{static/style/home.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{static/style/output.css}" rel="stylesheet"  />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/icons/bootstrap-icons.min.css" rel="stylesheet">
-    
-</head>
-<body>
+    <head>
+        <title>Tìm kiếm việc làm</title>
+        <link
+            th:href="@{static/style/home.css}"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link th:href="@{static/style/output.css}" rel="stylesheet" />
+        <link
+            rel="icon"
+            href="https://static.topcv.vn/v4/image/favicon.ico"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/icons/bootstrap-icons.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div th:replace="home/header.html :: body"></div>
 
-    
-    <div th:replace="home/header.html :: body"></div>
-   
-    
-    <div th:replace="home/slide-banner.html :: body"></div>
+        <div th:replace="home/slide-banner.html :: body"></div>
 
-     <!-- Việc làm mới nhất -->
-    <div class="bg-[#f3f5f7]">
-        <div class="container py-[24px]">
-            <div class="flex items-center justify-between">
-                <h1 class="text-[green] text-[26px] mb-[24px] font-bold">Việc làm mới nhất</h1>
-                <a th:href="@{/viec-lam-moi-nhat}" class="text-[#444]">Xem tất cả</a>
-            </div>
-            <div class="row">
-                <div th:each="job : ${newestJobs}" class="col-sm-6 mb-[16px]">
-                    <a th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" class="border-[1px] block shadow-md border-solid border-white hover:bg-[#f6f6f6!important] hover:border-[#ccc!important] group cursor-pointer  px-[18px] py-[12px] bg-white rounded-[8px]">
-                        <div class="flex overflow-hidden items-center " >
-                            <div class="flex-shrink-0">
-                                <img th:src="${job.company.avatar}" class="card-img-top rounded-[4px]  w-[40px!important] h-[40px]" alt="Avatar công ty">
-
-                            </div>
-                            <div class="ml-[16px]">
-                                <h5 th:text="${job.title}" class="group-hover:text-[green] font-[500] text-over leading-[17px] h-[17px]  text-[17px]  overflow-hidden "></h5>
-                                <p th:text="${job.company.name}" class="overflow-hidden text-over text-[14px] " ></p>
-    
-                            </div>
-    
-                        </div>
-                        <div class="flex mt-[16px] items-center justify-between">
-                            <div class="flex ">
-                                <p  class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                    <span th:text="${job.salaryStart}"></span>
-                                    <span> triệu</span>
-                                </p>
-                                <p class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                    <span th:text="${job.salaryEnd}"></span>
-                                    <span> triệu</span>
-                                </p>
-
-                                <p class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]">Còn <strong th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"></strong> ngày để ứng tuyển</p>
-
-                                <p th:text="${job.address.province}" class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                </p>
-    
-                            </div>
-                            <div class="hover:text-[green]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-heart" viewBox="0 0 16 16">
-                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                                  </svg>
-                            </div>
-
-                        </div>
-                    </a>
+        <!-- Việc làm mới nhất -->
+        <div class="bg-[#f3f5f7]">
+            <div class="container py-[24px]">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-[green] text-[26px] mb-[24px] font-bold">
+                        Việc làm mới nhất
+                    </h1>
+                    <a th:href="@{/viec-lam-moi-nhat}" class="text-[#444]"
+                        >Xem tất cả</a
+                    >
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Công ty hàng đầu -->
-    <div class="my-[32px]">
-        <div class="container relative">
-            <div class="flex items-center justify-between">
-                <h1 class="text-[green] text-[26px] mb-[24px] font-bold">Top công ty hàng đầu</h1>
-                    <!-- Điều hướng -->
-                    <div class="flex  gap-[12px]">
-                        <a th:href="@{/cong-ty}" class="text-[#444]">Xem tất cả</a>
-                        <a class=" block" href="#myCarousel" role="button" data-slide="prev">
-                            <button class="flex items-center justify-center h-[34px] w-[34px] rounded-full border-[1px] border-solid border-[green]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-                                  </svg>
-                            </button>
-                          </a>
-                          <a class=" block" href="#myCarousel" role="button" data-slide="next">
-                            <button class="flex items-center justify-center h-[34px] w-[34px] rounded-full border-[1px] border-solid border-[green]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                  </svg>
-                            </button>
-                          </a>
-                    </div>
-
-            </div>
-
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                          <a th:href="@{/cong-ty/{companyId}(companyId=${company.id})}"  th:each="company, status : ${topCompanies}" th:if="${status.index} &lt; 4" class="col  rounded-[8px] hover:shadow-md hover:border-[green!important] flex flex-col mx-[18px] px-[12px] py-[16px] border-[1px] border-solid border-[#ccc]">
-                            <img class="max-w-[100%] object-cover"  th:src="${company.avatar}" alt="Avatar">
-                            <h4 th:text="${company.name}" class="uppercase text-[16px] mt-[14px] text-center"></h4>
-                          </a>
-                          
-                        </div>
-                      </div>
-                  <div class="carousel-item">
-                    <div class="row">
-                        <a  th:href="@{/cong-ty/{companyId}(companyId=${company.id})}"  th:each="company, status : ${topCompanies}" th:if="${status.index} &gt;= 3 and ${status.index} &lt;= 7" class="col rounded-[8px] hover:shadow-md hover:border-[green!important] flex flex-col mx-[18px] px-[12px] py-[16px] border-[1px] border-solid border-[#ccc]">
-                          <img class="max-w-[100%] object-cover"  th:src="${company.avatar}" alt="Avatar">
-                          <h4 th:text="${company.name}" class="uppercase text-[16px] mt-[14px] text-center"></h4>
-                        </a>
-                        
-                      </div>
-                  </div>
-
-                  
-                  
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Việc làm tốt nhất -->
-    <div class="bg-[#f3f5f7]">
-        <div class="container py-[24px]">
-            <div class="flex items-center justify-between">
-                <h1 class="text-[green] text-[26px] mb-[24px] font-bold">Việc làm tốt nhất</h1>
-                <a th:href="@{/viec-lam-tot-nhat}" class="text-[#444]">Xem tất cả</a>
-            </div>
-            <div class="row">
-                <div th:each="job : ${topJobs}" class="col-sm-6 mb-[16px]">
-                    <a th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" class="border-[1px] block shadow-md border-solid border-white hover:bg-[#f6f6f6!important] hover:border-[#ccc!important] group cursor-pointer  px-[18px] py-[12px] bg-white rounded-[8px]">
-                        <div class="flex overflow-hidden items-center " >
-                            <img th:src="${job.company.avatar}" class="card-img-top rounded-[4px]  w-[40px!important] h-[40px]" alt="Avatar công ty">
-                            <div class="ml-[16px]">
-                                <h5 th:text="${job.title}" class="group-hover:text-[green] font-[500] text-over leading-[17px] h-[17px]  text-[17px]  overflow-hidden "></h5>
-                                <p th:text="${job.company.name}" class="overflow-hidden text-over text-[14px] " ></p>
-    
-                            </div>
-    
-                        </div>
-                        <div class="flex mt-[16px] items-center justify-between">
-                            <div class="flex ">
-                                <p  class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                    <span th:text="${job.salaryStart}"></span>
-                                    <span> triệu</span>
-                                </p>
-                                <p class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                    <span th:text="${job.salaryEnd}"></span>
-                                    <span> triệu</span>
-                                </p>
-
-                                <p class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]">Còn <strong th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"></strong> ngày để ứng tuyển</p>
-
-                                <p th:text="${job.address.province}" class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                </p>
-    
-                            </div>
-                            <div class="hover:text-[green]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-heart" viewBox="0 0 16 16">
-                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                                  </svg>
-                            </div>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
-
-    <!-- Gợi ý việc làm phù hợp -->
-    <div class="my-[32px]">
-        <div class="container">
-            <div class="flex items-center justify-between">
-                <h1 class="text-[green] text-[26px] mb-[24px] font-bold">Gợi ý việc làm phù hợp</h1>
-                <a href="" class="text-[#444]">Xem tất cả</a>
-            </div>
-            
-            <!-- Danh sách việc làm phù hợp  -->
-            <div class="row">
-                <div  th:each="job : ${suggestJobs}" class="col-sm-6 mb-[18px]">
-                        <div class="flex p-[12px] cursor-pointer rounded-[8px] border-[1px] border-solid border-[#ccc] hover:bg-[#f4f5f5]">
-                            <div class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#ccc] border-solid">
-                                <img class="w-[100%] rounded-[8px] " th:src="${job.company.avatar}" />
-                            </div>
-    
-                            <div>
-                                <a  th:href="@{/viec-lam/{jobId}(jobId=${job.id})}" th:text="${job.title}" class="text-[17px] font-[500] text-[#555] leading-[19px] block mb-[8px] hover:text-[green]">Biên Tập Viên Nội Dung Video (Content Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà Nội</a>
-                                <a  th:href="@{/cong-ty/{companyId}(companyId = ${job.company.id})}" class="text-[15px] text-[#555] font-[400]">CÔNG TY CỔ PHẦN MST ENTERTAINMENT</a>
-                                <div class="flex mt-[16px] items-center justify-between">
-                                        <p class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]">Còn <strong th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"></strong> ngày để ứng tuyển</p>
-                                        <p th:text="${job.address.province}" class="bg-[#f3f5f7] text-[black]  rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]">
-                                        </p>
-        
+                <div class="row">
+                    <div
+                        th:each="job : ${newestJobs}"
+                        class="col-sm-6 mb-[16px]"
+                    >
+                        <a
+                            th:href="@{/viec-lam/{jobId}(jobId=${job.id})}"
+                            class="border-[1px] block shadow-md border-solid border-white hover:bg-[#f6f6f6!important] hover:border-[#ccc!important] group cursor-pointer px-[18px] py-[12px] bg-white rounded-[8px]"
+                        >
+                            <div class="flex overflow-hidden items-center">
+                                <div class="flex-shrink-0">
+                                    <img
+                                        th:src="${job.company.avatar}"
+                                        class="card-img-top rounded-[4px] w-[40px!important] h-[40px]"
+                                        alt="Avatar công ty"
+                                    />
+                                </div>
+                                <div class="ml-[16px]">
+                                    <h5
+                                        th:text="${job.title}"
+                                        class="group-hover:text-[green] font-[500] text-over leading-[17px] h-[17px] text-[17px] overflow-hidden"
+                                    ></h5>
+                                    <p
+                                        th:text="${job.company.name}"
+                                        class="overflow-hidden text-over text-[14px]"
+                                    ></p>
                                 </div>
                             </div>
-                            <div class="flex flex-1 flex-column items-end justify-between min-w-[150px]" >
-                                <p class="font-[500] text-[green]"><span th:text="${job.salaryStart}" class="text-[green]"></span> - <span class="text-[green]" th:text="${job.salaryEnd}"></span> triệu</p>
+                            <div
+                                class="flex mt-[16px] items-center justify-between"
+                            >
+                                <div class="flex">
+                                    <p
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    >
+                                        <span
+                                            th:text="${job.salaryStart}"
+                                        ></span>
+                                        <span> triệu</span>
+                                    </p>
+                                    <p
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    >
+                                        <span th:text="${job.salaryEnd}"></span>
+                                        <span> triệu</span>
+                                    </p>
+
+                                    <p
+                                        class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]"
+                                    >
+                                        Còn
+                                        <strong
+                                            th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"
+                                        ></strong>
+                                        ngày để ứng tuyển
+                                    </p>
+
+                                    <p
+                                        th:text="${job.address.province}"
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    ></p>
+                                </div>
+                                <div class="hover:text-[green]">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="green"
+                                        class="bi bi-heart"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Công ty hàng đầu -->
+        <div class="my-[32px]">
+            <div class="container relative">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-[green] text-[26px] mb-[24px] font-bold">
+                        Top công ty hàng đầu
+                    </h1>
+                    <!-- Điều hướng -->
+                    <div class="flex gap-[12px]">
+                        <a th:href="@{/cong-ty}" class="text-[#444]"
+                            >Xem tất cả</a
+                        >
+                        <a
+                            class="block"
+                            href="#myCarousel"
+                            role="button"
+                            data-slide="prev"
+                        >
+                            <button
+                                class="flex items-center justify-center h-[34px] w-[34px] rounded-full border-[1px] border-solid border-[green]"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-chevron-left"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"
+                                    />
+                                </svg>
+                            </button>
+                        </a>
+                        <a
+                            class="block"
+                            href="#myCarousel"
+                            role="button"
+                            data-slide="next"
+                        >
+                            <button
+                                class="flex items-center justify-center h-[34px] w-[34px] rounded-full border-[1px] border-solid border-[green]"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-chevron-right"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"
+                                    />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div
+                    id="myCarousel"
+                    class="carousel slide"
+                    data-ride="carousel"
+                >
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <a
+                                    th:href="@{/cong-ty/{companyId}(companyId=${company.id})}"
+                                    th:each="company, status : ${topCompanies}"
+                                    th:if="${status.index} &lt; 4"
+                                    class="col rounded-[8px] hover:shadow-md hover:border-[green!important] flex flex-col mx-[18px] px-[12px] py-[16px] border-[1px] border-solid border-[#ccc]"
+                                >
+                                    <img
+                                        class="max-w-[100%] object-cover"
+                                        th:src="${company.avatar}"
+                                        alt="Avatar"
+                                    />
+                                    <h4
+                                        th:text="${company.name}"
+                                        class="uppercase text-[16px] mt-[14px] text-center"
+                                    ></h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <a
+                                    th:href="@{/cong-ty/{companyId}(companyId=${company.id})}"
+                                    th:each="company, status : ${topCompanies}"
+                                    th:if="${status.index} &gt;= 3 and ${status.index} &lt;= 7"
+                                    class="col rounded-[8px] hover:shadow-md hover:border-[green!important] flex flex-col mx-[18px] px-[12px] py-[16px] border-[1px] border-solid border-[#ccc]"
+                                >
+                                    <img
+                                        class="max-w-[100%] object-cover"
+                                        th:src="${company.avatar}"
+                                        alt="Avatar"
+                                    />
+                                    <h4
+                                        th:text="${company.name}"
+                                        class="uppercase text-[16px] mt-[14px] text-center"
+                                    ></h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Việc làm tốt nhất -->
+        <div class="bg-[#f3f5f7]">
+            <div class="container py-[24px]">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-[green] text-[26px] mb-[24px] font-bold">
+                        Việc làm tốt nhất
+                    </h1>
+                    <a th:href="@{/viec-lam-tot-nhat}" class="text-[#444]"
+                        >Xem tất cả</a
+                    >
+                </div>
+                <div class="row">
+                    <div th:each="job : ${topJobs}" class="col-sm-6 mb-[16px]">
+                        <a
+                            th:href="@{/viec-lam/{jobId}(jobId=${job.id})}"
+                            class="border-[1px] block shadow-md border-solid border-white hover:bg-[#f6f6f6!important] hover:border-[#ccc!important] group cursor-pointer px-[18px] py-[12px] bg-white rounded-[8px]"
+                        >
+                            <div class="flex overflow-hidden items-center">
+                                <img
+                                    th:src="${job.company.avatar}"
+                                    class="card-img-top rounded-[4px] w-[40px!important] h-[40px]"
+                                    alt="Avatar công ty"
+                                />
+                                <div class="ml-[16px]">
+                                    <h5
+                                        th:text="${job.title}"
+                                        class="group-hover:text-[green] font-[500] text-over leading-[17px] h-[17px] text-[17px] overflow-hidden"
+                                    ></h5>
+                                    <p
+                                        th:text="${job.company.name}"
+                                        class="overflow-hidden text-over text-[14px]"
+                                    ></p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex mt-[16px] items-center justify-between"
+                            >
+                                <div class="flex">
+                                    <p
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    >
+                                        <span
+                                            th:text="${job.salaryStart}"
+                                        ></span>
+                                        <span> triệu</span>
+                                    </p>
+                                    <p
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    >
+                                        <span th:text="${job.salaryEnd}"></span>
+                                        <span> triệu</span>
+                                    </p>
+
+                                    <p
+                                        class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]"
+                                    >
+                                        Còn
+                                        <strong
+                                            th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"
+                                        ></strong>
+                                        ngày để ứng tuyển
+                                    </p>
+
+                                    <p
+                                        th:text="${job.address.province}"
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    ></p>
+                                </div>
+                                <div class="hover:text-[green]">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="green"
+                                        class="bi bi-heart"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                                        />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gợi ý việc làm phù hợp -->
+        <div class="my-[32px]">
+            <div class="container">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-[green] text-[26px] mb-[24px] font-bold">
+                        Gợi ý việc làm phù hợp
+                    </h1>
+                    <a href="" class="text-[#444]">Xem tất cả</a>
+                </div>
+
+                <!-- Danh sách việc làm phù hợp  -->
+                <div class="row">
+                    <div
+                        th:each="job : ${suggestJobs}"
+                        class="col-sm-6 mb-[18px]"
+                    >
+                        <div
+                            class="flex p-[12px] cursor-pointer rounded-[8px] border-[1px] border-solid border-[#ccc] hover:bg-[#f4f5f5]"
+                        >
+                            <div
+                                class="w-[100px] mr-[16px] h-[100px] flex items-center justify-center flex-shrink-0 rounded-[8px] border-[1px] border-[#ccc] border-solid"
+                            >
+                                <img
+                                    class="w-[100%] rounded-[8px]"
+                                    th:src="${job.company.avatar}"
+                                />
+                            </div>
+
+                            <div>
+                                <a
+                                    th:href="@{/viec-lam/{jobId}(jobId=${job.id})}"
+                                    th:text="${job.title}"
+                                    class="text-[17px] font-[500] text-[#555] leading-[19px] block mb-[8px] hover:text-[green]"
+                                    >Biên Tập Viên Nội Dung Video (Content
+                                    Creator), Thu Nhập Lên Đến 20 Triệu Tại Hà
+                                    Nội</a
+                                >
+                                <a
+                                    th:href="@{/cong-ty/{companyId}(companyId = ${job.company.id})}"
+                                    class="text-[15px] text-[#555] font-[400]"
+                                    >CÔNG TY CỔ PHẦN MST ENTERTAINMENT</a
+                                >
+                                <div
+                                    class="flex mt-[16px] items-center justify-between"
+                                >
+                                    <p
+                                        class="text-[13px] px-[12px] mr-[6px!important] rounded-[4px] bg-[#e9eaec]"
+                                    >
+                                        Còn
+                                        <strong
+                                            th:text="${@timeUtil.daysOfExpired(job.expiredAt)}"
+                                        ></strong>
+                                        ngày để ứng tuyển
+                                    </p>
+                                    <p
+                                        th:text="${job.address.province}"
+                                        class="bg-[#f3f5f7] text-[black] rounded-[4px] px-[8px] py-[1px] text-[13px] mr-[6px!important]"
+                                    ></p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex flex-1 flex-column items-end justify-between min-w-[150px]"
+                            >
+                                <p class="font-[500] text-[green]">
+                                    <span
+                                        th:text="${job.salaryStart}"
+                                        class="text-[green]"
+                                    ></span>
+                                    -
+                                    <span
+                                        class="text-[green]"
+                                        th:text="${job.salaryEnd}"
+                                    ></span>
+                                    triệu
+                                </p>
                                 <div class="flex gap-[10px]">
-                                    <a th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}" class="opacity-[0.7] flex items-center text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]">Ứng tuyển</a>
+                                    <a
+                                        th:href="@{/ung-tuyen/{jobId}(jobId=${job.id})}"
+                                        class="opacity-[0.7] flex items-center text-white text-[14px] h-[28px] px-[12px] rounded-[3px] bg-[green]"
+                                        >Ứng tuyển</a
+                                    >
                                     <div class="hover:text-[green]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-heart" viewBox="0 0 16 16">
-                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                                          </svg>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="green"
+                                            class="bi bi-heart"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                                            />
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
-                
             </div>
-
-            
         </div>
-    </div>
-   
-    
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    
-    
-</body>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 </html>

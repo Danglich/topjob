@@ -5,6 +5,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
@@ -19,6 +20,12 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public String handleNoHandlerFound(NoHandlerFoundException ex) {
+		
+		return "page/notfound";
+	}
+	
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public String handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
 		
 		return "page/notfound";
 	}

@@ -1,129 +1,256 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link th:href="@{static/style/output.css}" rel="stylesheet"  />
-</head>
-<body>
-    <header class="flex gap-[24px] items-center h-[72px] px-[24px] bg-white">
+    <head>
+        <link th:href="@{static/style/output.css}" rel="stylesheet" />
+    </head>
+    <body>
+        <header
+            class="flex gap-[24px] items-center h-[72px] px-[24px] bg-white"
+        >
+            <a th:href="@{/}" class="w-[180px] block">
+                <img
+                    class="w-full h-full object-cover"
+                    src="https://static.topcv.vn/v4/image/logo/topcv-logo-tet-holiday.png"
+                />
+            </a>
 
-        <a th:href="@{/}" class="w-[180px] block">
-            <img class="w-full h-full object-cover"  src="https://static.topcv.vn/v4/image/logo/topcv-logo-tet-holiday.png">
-        </a>
+            <ul class="flex-1 m-[0] flex gap-[16px] font-[500] items-center">
+                <li class="px-[12px] group relative py-[12px]">
+                    <a
+                        class="text-[#444] hover:text-[green] no-underline"
+                        th:href="@{/viec-lam}"
+                    >
+                        Việc làm
+                    </a>
 
-        <ul class="flex-1 m-[0] flex gap-[16px] font-[500] items-center"> 
-            <li class="px-[12px] group relative py-[12px]">
-                <a class="text-[#444] hover:text-[green] no-underline" th:href="@{/viec-lam}">
-                    Việc làm
-                </a>
+                    <ul
+                        class="absolute z-[10] hidden group-hover:block top-[90%] shadow-md bg-white rounded-[8px] p-[16px] w-[400px]"
+                    >
+                        <li class="mb-[12px] hover:opacity-[0.9]">
+                            <a
+                                th:href="@{/viec-lam}"
+                                class="block rounded-[2px] group cursor-pointer hover:text-[green] flex gap-[14px] items-center h-[40px] bg-[#f4f5f5] px-[12px]"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="green"
+                                    class="bi bi-search"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+                                    />
+                                </svg>
+                                <span class="group-hover:text-[green]"
+                                    >Tìm việc làm
+                                </span>
+                            </a>
+                        </li>
+                        <li class="mb-[12px] hover:opacity-[0.9]">
+                            <a
+                                th:href="@{/lich-su-ung-tuyen}"
+                                class="block rounded-[2px] group cursor-pointer hover:text-[green] flex gap-[14px] items-center h-[40px] bg-[#f4f5f5] px-[12px]"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="green"
+                                    class="bi bi-bag-check"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"
+                                    />
+                                    <path
+                                        d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"
+                                    />
+                                </svg>
+                                <span class="group-hover:text-[green]"
+                                    >Lịch sử ứng tuyển
+                                </span>
+                            </a>
+                        </li>
+                        <li class="mb-[12px] hover:opacity-[0.9]">
+                            <a
+                                th:href="@{/viec-lam-da-luu}"
+                                class="block rounded-[2px] group cursor-pointer hover:text-[green] flex gap-[14px] items-center h-[40px] bg-[#f4f5f5] px-[12px]"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="green"
+                                    class="bi bi-heart"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                                    />
+                                </svg>
+                                <span class="group-hover:text-[green]"
+                                    >Việc làm đã lưu
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="px-[12px] group relative py-[12px]">
+                    <a
+                        class="text-[#444] hover:text-[green] no-underline"
+                        th:href="@{/quan-ly-cv}"
+                    >
+                        Quản lý CV
+                    </a>
+                </li>
+                <li class="px-[12px] group relative py-[12px]">
+                    <a
+                        class="text-[#444] hover:text-[green] no-underline"
+                        th:href="@{/cong-ty}"
+                    >
+                        Công ty
+                    </a>
+                </li>
+            </ul>
 
-                <ul class="absolute z-[10] hidden group-hover:block top-[90%]  shadow-md bg-white rounded-[8px] p-[16px] w-[400px]">
-                    <li class="mb-[12px] hover:opacity-[0.9]">
-                        <a th:href="@{/viec-lam}" class="block rounded-[2px] group cursor-pointer hover:text-[green] flex gap-[14px] items-center h-[40px] bg-[#f4f5f5] px-[12px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                              </svg>
-                            <span class="group-hover:text-[green]">Tìm việc làm </span>
-                        </a>
-                    </li>
-                    <li class="mb-[12px] hover:opacity-[0.9]">
-                        <a  th:href="@{/lich-su-ung-tuyen}" class="block rounded-[2px] group cursor-pointer hover:text-[green] flex gap-[14px] items-center h-[40px] bg-[#f4f5f5] px-[12px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-bag-check" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-                              </svg>
-                            <span class="group-hover:text-[green]">Lịch sử ứng tuyển </span>
-                        </a>
-                    </li>
-                    <li class="mb-[12px] hover:opacity-[0.9]">
-                        <a  th:href="@{/viec-lam-da-luu}" class="block rounded-[2px] group cursor-pointer hover:text-[green] flex gap-[14px] items-center h-[40px] bg-[#f4f5f5] px-[12px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-heart" viewBox="0 0 16 16">
-                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                              </svg>
-                            <span class="group-hover:text-[green]">Việc làm đã lưu </span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="px-[12px] group relative py-[12px]">
-                <a class="text-[#444] hover:text-[green] no-underline" th:href="@{/quan-ly-cv}">
-                    Quản lý CV
-                </a>
-            </li>
-            <li class="px-[12px] group relative py-[12px]">
-                <a class="text-[#444] hover:text-[green] no-underline" th:href="@{/cong-ty}">
-                    Công ty
-                </a>
-            </li>
-        </ul>
+            <div>
+                <div
+                    class="flex items-center gap-[24px]"
+                    sec:authorize="isAuthenticated()"
+                >
+                    <div sec:authorize="hasRole('ROLE_EMPLOYER')">
+                        <a class="btn btn-info" th:href="@{/employer/home}"
+                            >Tuyển dụng</a
+                        >
+                    </div>
 
-        <div >
-            <div class="flex items-center gap-[24px]" sec:authorize="isAuthenticated()">
-                <div sec:authorize ="hasRole('ROLE_EMPLOYER')">
-                    <a class="btn btn-info" th:href="@{/employer/home}">Tuyển dụng</a>
-                </div>
+                    <div
+                        class="relative group flex items-center gap-[16px] rounded-[40px] bg-[#f5f5f5] px-[12px] py-[8px] cursor-pointer"
+                    >
+                        <img
+                            th:src="@{/static/images/avatar-default.jpg}"
+                            class="w-[32px] h-[32px] object-cover object-center rounded-full"
+                        />
+                        <span
+                            sec:authentication="principal.fullname"
+                            class="font-[500]"
+                        ></span>
 
-                <div class="relative group flex items-center gap-[16px] rounded-[40px] bg-[#f5f5f5] px-[12px] py-[8px] cursor-pointer">
-                    <img  th:src="@{/static/images/avatar-default.jpg}" class="w-[32px] h-[32px] object-cover object-center rounded-full" />
-                    <span sec:authentication="principal.fullname" class="font-[500]"></span>
-
-                    <div class="absolute group-hover:block hidden z-[10] top-[100%] right-[0] w-[400px] bg-white shadow-md rounded-[8px] px-[16px] py-[12px]">
-                        <div class="flex gap-[16px]">
-                            <img  th:src="@{/static/images/avatar-default.jpg}" class="w-[32px] h-[32px] object-cover object-center rounded-full" />
-                            <div class="">
-                                <h4 sec:authentication="principal.fullname" class="text-[15px] text-green-800"></h4>
-                                <p class="text-[14px] text-[#777]">Mã ứng viên : <span class="font-bold text-[#444]">#fafsg4</span></p>
-                                <p th:text="${#authentication.name}" class="text-[14px] text-[#777]"></p>
+                        <div
+                            class="absolute group-hover:block hidden z-[10] top-[100%] right-[0] w-[400px] bg-white shadow-md rounded-[8px] px-[16px] py-[12px]"
+                        >
+                            <div class="flex gap-[16px]">
+                                <img
+                                    th:src="@{/static/images/avatar-default.jpg}"
+                                    class="w-[32px] h-[32px] object-cover object-center rounded-full"
+                                />
+                                <div class="">
+                                    <h4
+                                        sec:authentication="principal.fullname"
+                                        class="text-[15px] text-green-800"
+                                    ></h4>
+                                    <p class="text-[14px] text-[#777]">
+                                        Mã ứng viên :
+                                        <span class="font-bold text-[#444]"
+                                            >#fafsg4</span
+                                        >
+                                    </p>
+                                    <p
+                                        th:text="${#authentication.name}"
+                                        class="text-[14px] text-[#777]"
+                                    ></p>
+                                </div>
                             </div>
+                            <hr />
+                            <ul>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="block mb-[12px] px-[14px] text-[500] hover:text-[green] flex items-center gap-[18px] h-[42px] bg-[#f5f5f5] rounded-[6px]"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="green"
+                                            class="bi bi-eye"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"
+                                            />
+                                            <path
+                                                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"
+                                            />
+                                        </svg>
+                                        <span>Nhà tuyển dụng đã xem hồ sơ</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        th:href="@{/thong-tin-ca-nhan}"
+                                        class="block mb-[12px] px-[14px] text-[500] hover:text-[green] flex items-center gap-[18px] h-[42px] bg-[#f5f5f5] rounded-[6px]"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="green"
+                                            class="bi bi-gear"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"
+                                            />
+                                            <path
+                                                d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"
+                                            />
+                                        </svg>
+                                        <span>Cài đặt thông tin cá nhân</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        th:href="@{/doi-mat-khau}"
+                                        class="block mb-[12px] px-[14px] text-[500] hover:text-[green] flex items-center gap-[18px] h-[42px] bg-[#f5f5f5] rounded-[6px]"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="green"
+                                            class="bi bi-bag"
+                                            viewBox="0 0 16 16"
+                                        >
+                                            <path
+                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"
+                                            />
+                                        </svg>
+                                        <span>Đổi mật khẩu</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <form th:action="@{/logout}" method="post">
+                                        <input
+                                            type="submit"
+                                            class="btn btn-info"
+                                            value="Đăng xuất"
+                                        />
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
-                        <hr>
-                        <ul>
-                            <li>
-                                <a href="#" class="block mb-[12px] px-[14px] text-[500] hover:text-[green] flex items-center gap-[18px] h-[42px] bg-[#f5f5f5] rounded-[6px]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-eye" viewBox="0 0 16 16">
-                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-                                      </svg>
-                                      <span>Nhà tuyển dụng đã xem hồ sơ</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a th:href="@{/thong-tin-ca-nhan}" class="block mb-[12px] px-[14px] text-[500] hover:text-[green] flex items-center gap-[18px] h-[42px] bg-[#f5f5f5] rounded-[6px]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-gear" viewBox="0 0 16 16">
-                                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
-                                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
-                                      </svg>
-                                      <span>Cài đặt thông tin cá nhân</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a th:href="@{/doi-mat-khau}" class="block mb-[12px] px-[14px] text-[500] hover:text-[green] flex items-center gap-[18px] h-[42px] bg-[#f5f5f5] rounded-[6px]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-bag" viewBox="0 0 16 16">
-                                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-                                      </svg>
-                                      <span>Đổi mật khẩu</span>
-                                </a>
-                            </li>
-                            <li >
-                                <form th:action="@{/logout}" method="post" >
-                                    <input type="submit" class="btn btn-info" value="Đăng xuất" />
-                                
-                                </form>
-                            </li>
-                        </ul>
                     </div>
                 </div>
-
-                
-                
+                <div sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-info" th:href="@{/auth/login}"
+                        >Đăng nhập</a
+                    >
+                </div>
             </div>
-            <div sec:authorize="!isAuthenticated()">
-                <a class="btn btn-info" th:href="@{/auth/login}" >Đăng nhập</a>
-            </div>
-
-        </div>
-
-    </header>
-    
-    
-</body>
+        </header>
+    </body>
 </html>
